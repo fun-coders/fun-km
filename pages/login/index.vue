@@ -1,6 +1,6 @@
 <template>
   <div class="flex h-full w-full flex-col items-center justify-center">
-    <Logo class="mb-2 w-full" />
+    <logo class="mb-2 w-full" />
     <AuthLogin />
   </div>
 </template>
