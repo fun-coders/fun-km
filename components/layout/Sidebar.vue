@@ -1,10 +1,24 @@
 <template>
-  <div class="sidebar h-full w-[350px] rounded-r-3xl bg-[--sidebar-bg] p-3">
-    <div class="sidebar-header pb-3">
+  <div class="h-full w-[350px] rounded-r-3xl bg-[--sidebar-bg] p-3">
+    <div class="sidebar-header h-[75px]">
       <logo />
     </div>
-    <div class="sidebar-menu">
-      <UVerticalNavigation :links="topLinks" :ui="verticalNavigationUI" />
+    <div class="flex h-[calc(100%-75px)] flex-col justify-between">
+      <div>
+        <UVerticalNavigation :links="topLinks" :ui="verticalNavigationUI" />
+        <UDivider />
+      </div>
+      <div>
+        <UDivider />
+        <div class="flex items-center justify-between">
+          <div>
+            <UButton icon="i-heroicons-user-solid" size="sm" color="primary" square variant="ghost" />
+            <UButton icon="i-heroicons-user-solid" size="sm" color="primary" square variant="ghost" />
+            <UButton icon="i-heroicons-user-solid" size="sm" color="primary" square variant="ghost" />
+          </div>
+          <UButton icon="i-heroicons-cog-6-tooth" size="sm" color="primary" square variant="link" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -13,7 +27,7 @@ const topLinks = [
   [
     {
       label: '首页',
-      icon: 'i-heroicons-home',
+      icon: 'i-heroicons-home-solid',
       to: '/',
     },
     {
