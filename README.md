@@ -1,14 +1,13 @@
 # FUN-KM
 
-基于supabase的知识库系统
+A multi-tenant knowledge base system based on supabase.
 
 ## Setup
 
-安装依赖
+Install dependencies
 
 ```bash
 pnpm install
-
 ```
 
 ## Development Server
@@ -18,6 +17,14 @@ Start the development server on `http://localhost:15500`:
 ```bash
 pnpm run dev
 ```
+
+## Dev Document
+
+- Nuxt: https://nuxt.com/
+- Nuxt UI: https://ui.nuxt.com/
+- Supabase: https://supabase.com/docs
+- Tailwindcss: https://tailwindcss.com/docs
+- Iconify: https://icones.js.org/
 
 ## Production
 

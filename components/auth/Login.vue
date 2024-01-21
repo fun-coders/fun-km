@@ -1,8 +1,5 @@
 <template>
-  <el-card class="fe-card z-10 w-full">
-    <template #header>
-      <h2 class="text-2xl font-bold">登录</h2>
-    </template>
+  <UCard class="fe-card z-10 w-full">
     <div class="flex min-h-[600px] min-w-[700px] justify-between p-10">
       <div class="fe-card-left relative w-2/3">
         <div class="relative z-10 mb-20 text-5xl font-bold">
@@ -13,81 +10,91 @@
           <div>如果你还没有注册账号</div>
           <div>
             <span class="align-middle">点击这里-></span>
-            <el-button link type="primary">
+            <ULink>
               <span class="text-xl font-bold">立即注册</span>
-            </el-button>
+            </ULink>
           </div>
         </div>
         <nuxt-img
           class="absolute bottom-0 right-2 z-0 ml-auto"
           src="/images/auth-card.png"
-          placeholder
           alt="知识库卡片登录背景"
           sizes="30vw"
           loading="lazy"
         ></nuxt-img>
       </div>
-      <div class="flex w-1/3 flex-col justify-center">
-        <el-form :model="form" :rules="rules" label-width="0" size="large">
-          <el-form-item prop="email">
-            <el-input v-model="form.email" placeholder="请输入邮箱" clearable></el-input>
-          </el-form-item>
-          <el-form-item prop="password">
-            <el-input v-model="form.password" type="password" placeholder="请输入密码" show-password></el-input>
-          </el-form-item>
-        </el-form>
-        <div class="flex w-full justify-end">
-          <el-button class="mb-5 mt-20" size="large" link>
-            <span>忘记密码？</span>
-          </el-button>
-        </div>
-        <el-button class="w-full" size="large" type="primary" @click="handleLogin">
-          <span v-if="loading">登录中...</span>
-          <span v-else>登录</span>
-        </el-button>
+      <div class="w-1/3">
+        <UForm class="flex h-full w-full flex-col justify-center" :schema="schema" :state="state" @submit="onSubmit">
+          <UFormGroup class="h-20" label="" name="email">
+            <UInput v-model="state.email" size="xl" placeholder="请输入邮箱" clearable></UInput>
+          </UFormGroup>
+          <UFormGroup class="h-20" label="" name="password">
+            <UInput v-model="state.password" size="xl" type="password" placeholder="请输入密码" show-password></UInput>
+          </UFormGroup>
+          <div class="flex w-full justify-end">
+            <ULink class="mb-5 mt-20">
+              <span>忘记密码？</span>
+            </ULink>
+          </div>
+          <UButton type="submit" block size="xl">
+            <span v-if="loading">登录中...</span>
+            <span v-else>登录</span>
+          </UButton>
+        </UForm>
       </div>
     </div>
-  </el-card>
+  </UCard>
 </template>
 <script setup lang="ts">
+import { z } from 'zod';
+import type { FormSubmitEvent } from '#ui/types';
+
 const supabase = useSupabaseClient();
+const toast = useToast();
 
 const loading = ref(false);
 const router = useRouter();
-const form = ref({
+const state = reactive({
   email: '',
   password: '',
 });
-const rules = ref({
-  email: [
-    { required: true, message: '请输入邮箱', trigger: 'blur' },
-    {
-      type: 'email',
-      message: '请输入正确的邮箱地址',
-      trigger: ['blur', 'change'],
-    },
-  ],
-  password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+const schema = z.object({
+  email: z.string().min(1, '请输入邮箱').email('请检查邮箱格式'),
+  password: z.string().min(1, '请输入密码'),
 });
-const handleLogin = async () => {
+type Schema = z.output<typeof schema>;
+async function onSubmit(event: FormSubmitEvent<Schema>) {
   try {
     loading.value = true;
-    const { error } = await supabase.auth.signInWithPassword(form.value);
+    const { error } = await supabase.auth.signInWithPassword(event.data);
     if (error) throw error;
-    ElMessage('验证成功，正在跳转...');
-    router.push('/');
+    await router.push('/');
+    toast.add({
+      id: 'login-success',
+      title: '登录成功',
+      description: '欢迎进入知识库',
+      icon: 'i-heroicons-check-circle',
+      timeout: 1500,
+      color: 'green',
+    });
   } catch (error) {
-    ElMessage('登录失败，请检查邮箱和密码是否正确');
+    toast.add({
+      id: 'login-error',
+      title: '登录失败',
+      description: '检查邮箱和密码是否正确',
+      icon: 'i-heroicons-shield-exclamation',
+      color: 'red',
+    });
   } finally {
     loading.value = false;
   }
-};
+}
 </script>
 <style scoped lang="scss">
 .fe-card {
   border-radius: 20px;
   .fe-card-left {
-    background: radial-gradient(50% 50% at 50% 50%, var(--el-color-primary-light-5) 0, transparent);
+    background: radial-gradient(50% 50% at 50% 50%, rgba(var(--color-primary-300)), transparent);
   }
 }
 </style>

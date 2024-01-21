@@ -2,9 +2,6 @@
 export default defineNuxtConfig({
   devtools: {
     enabled: true,
-    timeline: {
-      enabled: true,
-    },
   },
   devServer: {
     host: '0.0.0.0',
@@ -23,17 +20,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {},
   },
-  modules: ['@nuxtjs/eslint-module', '@nuxt/image', '@nuxtjs/google-fonts', '@nuxtjs/supabase', '@element-plus/nuxt', '@nuxtjs/tailwindcss'],
+  modules: ['@nuxtjs/eslint-module', '@nuxt/ui', '@nuxt/image', '@nuxtjs/google-fonts', '@nuxtjs/supabase'],
   css: ['~/assets/styles/main.scss', '@fortawesome/fontawesome-svg-core/styles.css'],
-  vite: {
-    css: {
-      preprocessorOptions: {
-        scss: {
-          additionalData: `@use "~/assets/styles/global/element.scss" as element;`,
-        },
-      },
-    },
-  },
   build: {
     transpile: [
       '@fortawesome/vue-fontawesome',
@@ -55,22 +43,6 @@ export default defineNuxtConfig({
       login: '/login',
       callback: '/',
       exclude: [],
-    },
-  },
-  elementPlus: {
-    importStyle: 'scss',
-  },
-  tailwindcss: {
-    cssPath: '~/assets/styles/global/tailwind.scss',
-    configPath: 'tailwind.config.ts',
-    injectPosition: 'last',
-  },
-  postcss: {
-    plugins: {
-      'postcss-import': {},
-      'tailwindcss/nesting': {},
-      tailwindcss: {},
-      autoprefixer: {},
     },
   },
   eslint: {

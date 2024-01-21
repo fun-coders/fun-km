@@ -2,18 +2,29 @@ import type { Config } from 'tailwindcss';
 
 // Default are on https://tailwindcss.nuxtjs.org/tailwind/config#default-configuration
 export default <Partial<Config>>{
-  content: [
-    './components/**/*.{vue,js,ts,jsx,tsx}',
-    './layouts/**/*.{vue,js,ts,jsx,tsx}',
-    './pages/**/*.{vue,js,ts,jsx,tsx}',
-    './plugins/**/*.{vue,js,ts,jsx,tsx}',
-    './nuxt.config.{js,ts}',
-    './app.vue',
-  ],
   theme: {
-    container: {
-      center: true,
+    extend: {
+      aspectRatio: {
+        auto: 'auto',
+        square: '1 / 1',
+        video: '16 / 9',
+      },
+      // https://uicolors.app/
+      colors: {
+        green: {
+          50: '#EFFDF5',
+          100: '#D9FBE8',
+          200: '#B3F5D1',
+          300: '#75EDAE',
+          400: '#00DC82',
+          500: '#00C16A',
+          600: '#00A155',
+          700: '#007F45',
+          800: '#016538',
+          900: '#0A5331',
+          950: '#052e16',
+        },
+      },
     },
   },
-  plugins: [],
 };
