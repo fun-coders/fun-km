@@ -26,10 +26,10 @@
       <div class="w-1/3">
         <UForm class="flex h-full w-full flex-col justify-center" :schema="schema" :state="state" @submit="onSubmit">
           <UFormGroup class="h-20" label="" name="email">
-            <UInput v-model="state.email" size="xl" placeholder="请输入邮箱" clearable></UInput>
+            <UInput v-model="state.email" size="xl" placeholder="请输入邮箱"></UInput>
           </UFormGroup>
           <UFormGroup class="h-20" label="" name="password">
-            <UInput v-model="state.password" size="xl" type="password" placeholder="请输入密码" show-password></UInput>
+            <UInput v-model="state.password" size="xl" type="password" placeholder="请输入密码"></UInput>
           </UFormGroup>
           <div class="flex w-full justify-end">
             <ULink class="mb-5 mt-20">

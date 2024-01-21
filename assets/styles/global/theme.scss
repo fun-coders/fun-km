@@ -1,0 +1,13 @@
+@use 'variables' as *;
+
+.light body {
+  --sidebar-bg: #{$sidebar-bg-light};
+  background-color: $base-bg-light;
+  color: $base-text-light;
+}
+
+.dark body {
+  --sidebar-bg: #{$sidebar-bg-dark};
+  background-color: $base-bg-dark;
+  color: $base-text-dark;
+}

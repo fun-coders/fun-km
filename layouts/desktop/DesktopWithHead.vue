@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-full w-full flex-col items-center justify-center text-white">
+  <div class="flex h-full w-full flex-col items-center justify-center">
     <div class="flex h-[100px] w-full justify-between pl-10 pr-20 pt-5 text-3xl">
       <logo class="w-[230px]"></logo>
       <nav class="w-[calc(100%-440px)]">

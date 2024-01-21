@@ -1,6 +1,6 @@
 @use 'variables' as *;
 @use 'scrollbar' as *;
-html {
+@use 'theme' as *;
+body {
   font-family: $default-font-family;
-  background-color: #99a8c0;
 }

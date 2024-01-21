@@ -1,6 +1,7 @@
 <template>
-  <div class="container mx-auto flex h-full w-full items-center justify-center">
+  <lazy-layout-sidebar />
+  <UContainer class="w-full">
     <slot />
-  </div>
+  </UContainer>
 </template>
 <script setup lang="ts"></script>

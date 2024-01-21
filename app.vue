@@ -6,4 +6,7 @@
   </div>
   <UNotifications />
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const colorMode = useColorMode();
+colorMode.preference = 'light';
+</script>
