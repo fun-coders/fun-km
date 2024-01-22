@@ -3,7 +3,7 @@
     :icon="colorMode.preference === 'light' ? 'i-heroicons-sun' : 'i-heroicons-moon'"
     color="primary"
     square
-    variant="solid"
+    :variant="variant"
     @click="changeTheme"
   >
   </UButton>
@@ -13,4 +13,10 @@ const colorMode = useColorMode();
 const changeTheme = () => {
   colorMode.preference = colorMode.preference === 'light' ? 'dark' : 'light';
 };
+defineProps({
+  variant: {
+    type: String,
+    default: () => 'solid',
+  },
+});
 </script>

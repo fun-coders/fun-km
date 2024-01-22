@@ -9,8 +9,8 @@
         <div class="relative z-10 mt-2 text-base">
           <div>如果你还没有注册账号</div>
           <div>
-            <span class="align-middle">点击这里-></span>
-            <ULink>
+            <span class="align-middle">点击这里<UIcon name="i-heroicons-arrow-long-right" /></span>
+            <ULink to="/register">
               <span class="text-xl font-bold">立即注册</span>
             </ULink>
           </div>
@@ -26,17 +26,24 @@
       <div class="w-1/3">
         <UForm class="flex h-full w-full flex-col justify-center" :schema="schema" :state="state" @submit="onSubmit">
           <UFormGroup class="h-20" label="" name="email">
-            <UInput v-model="state.email" size="xl" placeholder="请输入邮箱"></UInput>
+            <UInput v-model="state.email" class="shadow-md" size="xl" placeholder="请输入邮箱" autocomplete="username"></UInput>
           </UFormGroup>
           <UFormGroup class="h-20" label="" name="password">
-            <UInput v-model="state.password" size="xl" type="password" placeholder="请输入密码"></UInput>
+            <UInput
+              v-model="state.password"
+              class="shadow-md"
+              size="xl"
+              type="password"
+              placeholder="请输入密码"
+              autocomplete="current-password"
+            ></UInput>
           </UFormGroup>
           <div class="flex w-full justify-end">
             <ULink class="mb-5 mt-20">
               <span>忘记密码？</span>
             </ULink>
           </div>
-          <UButton type="submit" block size="xl">
+          <UButton class="shadow-lg" type="submit" block size="xl">
             <span v-if="loading">登录中...</span>
             <span v-else>登录</span>
           </UButton>
@@ -68,13 +75,13 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     loading.value = true;
     const { error } = await supabase.auth.signInWithPassword(event.data);
     if (error) throw error;
-    await router.push('/');
+    await router.push('/dashboard');
     toast.add({
       id: 'login-success',
       title: '登录成功',
       description: '欢迎进入知识库',
       icon: 'i-heroicons-check-circle',
-      timeout: 1500,
+      timeout: 2000,
       color: 'green',
     });
   } catch (error) {

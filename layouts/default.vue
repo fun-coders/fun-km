@@ -5,6 +5,6 @@
 </template>
 <script setup lang="ts">
 onBeforeMount(() => {
-  setPageLayout('desktop-basic');
+  setPageLayout('desktop-home-page');
 });
 </script>

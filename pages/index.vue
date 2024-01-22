@@ -1,6 +1,6 @@
 <template>
-  <div class="relative flex h-full w-full flex-col justify-between p-10 text-white">
-    <div class="relative z-10 ml-20 text-9xl font-bold">
+  <div class="relative flex h-full w-full flex-col justify-between p-10 drop-shadow-2xl">
+    <div class="relative z-10 ml-20 text-9xl font-bold text-white">
       <h1 class="mb-16">多人协同</h1>
       <h1 class="mb-16 ml-48">知识库</h1>
       <h2 class="ml-96">知识尽在掌握</h2>
@@ -21,9 +21,4 @@
     ></nuxt-img>
   </div>
 </template>
-<script setup lang="ts">
-definePageMeta({
-  layout: 'desktop-with-head',
-  colorMode: 'light',
-});
-</script>
+<script setup lang="ts"></script>

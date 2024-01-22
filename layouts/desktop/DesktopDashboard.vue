@@ -1,5 +1,5 @@
 <template>
-  <lazy-layout-sidebar />
+  <layout-sidebar />
   <UContainer class="w-full">
     <slot />
   </UContainer>

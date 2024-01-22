@@ -8,7 +8,7 @@
         <layout-theme-change-button />
       </div>
     </div>
-    <AuthLogin />
+    <AuthRegister />
   </div>
 </template>
 <script setup lang="ts">
