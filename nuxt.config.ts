@@ -42,7 +42,7 @@ export default defineNuxtConfig({
     redirectOptions: {
       login: '/login',
       callback: '/',
-      exclude: ['/register', '/about'],
+      exclude: ['/register', '/about', '/'],
     },
   },
   eslint: {
