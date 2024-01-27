@@ -1,6 +1,6 @@
 {
   "name": "fun-km",
-  "packageManager": "pnpm@8.14.1",
+  "packageManager": "pnpm@8.14.3",
   "private": true,
   "type": "module",
   "scripts": {
@@ -20,16 +20,12 @@
     "pnpm": ">=8.14.0"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.5.1",
-    "@fortawesome/free-brands-svg-icons": "^6.5.1",
-    "@fortawesome/free-regular-svg-icons": "^6.5.1",
-    "@fortawesome/free-solid-svg-icons": "^6.5.1",
-    "@fortawesome/vue-fontawesome": "^3.0.5",
     "@nuxt/image": "^1.3.0",
     "@nuxt/ui": "^2.12.3",
     "@nuxtjs/eslint-module": "^4.1.0",
     "@nuxtjs/google-fonts": "^3.1.3",
     "@nuxtjs/supabase": "^1.1.5",
+    "@pinia/nuxt": "^0.5.1",
     "dayjs": "^1.11.10",
     "vue": "^3.4.15",
     "vue-router": "^4.2.5",

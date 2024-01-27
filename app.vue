@@ -4,7 +4,10 @@
       <NuxtPage />
     </NuxtLayout>
   </div>
+  <!-- global Pop-up box start -->
   <UNotifications />
+  <Settings />
+  <!-- global Pop-up box end-->
 </template>
 <script setup lang="ts">
 const colorMode = useColorMode();

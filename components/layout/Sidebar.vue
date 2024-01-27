@@ -7,16 +7,18 @@
       </NuxtLink>
     </div>
     <div class="m-3 mt-0 h-[60px]">
-      <UButton class="h-full w-full bg-[--sidebar-bg] text-black hover:bg-[--sidebar-hover-bg]" variant="ghost">
-        <div class="mx-4 flex w-full items-center justify-between">
-          <UAvatar size="md" src="https://avatars.githubusercontent.com/u/739984?v=4" alt="Avatar" />
-          <div class="ml-3 mr-auto flex flex-col items-start justify-between">
-            <div class="text-xl font-semibold">彭于晏</div>
-            <div class="text-xs">mail@lichong.host</div>
+      <LayoutAuthDropDown class="h-full w-full">
+        <UButton class="h-full w-full bg-[--sidebar-bg] text-black hover:bg-[--sidebar-hover-bg]" variant="ghost">
+          <div class="mx-4 flex w-full items-center justify-between">
+            <UAvatar size="md" src="https://avatars.githubusercontent.com/u/739984?v=4" alt="Avatar" />
+            <div class="ml-3 mr-auto flex flex-col items-start justify-between">
+              <div class="text-xl font-semibold">彭于晏</div>
+              <div class="text-xs">mail@lichong.host</div>
+            </div>
+            <UIcon name="i-heroicons-arrows-up-down-solid" />
           </div>
-          <UIcon name="i-heroicons-arrows-up-down-solid" />
-        </div>
-      </UButton>
+        </UButton>
+      </LayoutAuthDropDown>
     </div>
     <div class="flex h-[calc(100%-135px)] flex-col justify-between">
       <div>
@@ -28,43 +30,22 @@
         <div class="flex items-center justify-between px-3">
           <div>
             <UTooltip text="个人空间">
-              <UButton icon="i-heroicons-user-solid" size="sm" color="primary" square variant="ghost" />
+              <UButton icon="i-heroicons-user-solid" color="primary" square variant="ghost" />
             </UTooltip>
             <UTooltip text="租户一">
-              <UButton icon="i-heroicons-building-office-2" size="sm" color="primary" square variant="ghost" />
+              <UButton icon="i-heroicons-building-office-2" color="primary" square variant="ghost" />
             </UTooltip>
             <UTooltip text="租户二">
-              <UButton icon="i-heroicons-building-office-2" size="sm" color="primary" square variant="ghost" />
+              <UButton icon="i-heroicons-building-office-2" color="primary" square variant="ghost" />
             </UTooltip>
           </div>
-          <UButton
-            icon="i-heroicons-cog-6-tooth"
-            size="sm"
-            color="primary"
-            square
-            variant="link"
-            @click="() => (settingModalOpen = !settingModalOpen)"
-          />
+          <UTooltip text="收起">
+            <UButton class="rotate-[90deg]" icon="i-heroicons-bars-arrow-down-solid" color="primary" square variant="link" />
+          </UTooltip>
         </div>
       </div>
     </div>
   </div>
-  <UModal v-model="settingModalOpen">
-    <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
-      <template #header>
-        <div class="flex items-center justify-between">
-          <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">设置</h3>
-          <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1" @click="settingModalOpen = false" />
-        </div>
-      </template>
-      内容
-      <template #footer>
-        <div class="flex items-center justify-end">
-          <UButton color="primary" square variant="solid">保存</UButton>
-        </div>
-      </template>
-    </UCard>
-  </UModal>
 </template>
 <script setup lang="ts">
 const isExpand = ref(true);
@@ -97,5 +78,4 @@ const verticalNavigationUI = {
   active: 'bg-gradient-to-r to-transparent from-[--sidebar-active-bg] before:!static !font-semibold',
   inactive: ' before:!static hover:bg-[--sidebar-hover-bg] dark:hover:bg-gray-800',
 };
-const settingModalOpen = ref(false);
 </script>

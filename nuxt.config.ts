@@ -20,17 +20,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {},
   },
-  modules: ['@nuxtjs/eslint-module', '@nuxt/ui', '@nuxt/image', '@nuxtjs/google-fonts', '@nuxtjs/supabase'],
-  css: ['~/assets/styles/main.scss', '@fortawesome/fontawesome-svg-core/styles.css'],
-  build: {
-    transpile: [
-      '@fortawesome/vue-fontawesome',
-      '@fortawesome/fontawesome-svg-core',
-      '@fortawesome/free-brands-svg-icons',
-      '@fortawesome/free-regular-svg-icons',
-      '@fortawesome/free-solid-svg-icons',
-    ],
-  },
+  modules: ['@nuxtjs/eslint-module', '@nuxt/ui', '@nuxt/image', '@nuxtjs/google-fonts', '@nuxtjs/supabase', '@pinia/nuxt'],
+  css: ['~/assets/styles/main.scss'],
   image: {
     format: ['webp'],
   },
