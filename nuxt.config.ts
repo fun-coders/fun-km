@@ -52,6 +52,7 @@ export default defineNuxtConfig({
   googleFonts: {
     download: true,
     families: {
+      Poppins: true,
       Roboto: true,
       'Noto+Serif+Simplified+Chinese': true,
     },

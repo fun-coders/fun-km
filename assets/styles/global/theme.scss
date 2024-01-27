@@ -2,12 +2,16 @@
 
 .light body {
   --sidebar-bg: #{$sidebar-bg-light};
+  --sidebar-active-bg: #{$sidebar-active-bg-light};
+  --sidebar-hover-bg: #{$sidebar-hover-bg-light};
   background-color: $base-bg-light;
   color: $base-text-light;
 }
 
 .dark body {
   --sidebar-bg: #{$sidebar-bg-dark};
+  --sidebar-active-bg: #{$sidebar-active-bg-dark};
+  --sidebar-hover-bg: #{$sidebar-hover-bg-dark};
   background-color: $base-bg-dark;
   color: $base-text-dark;
 }

@@ -5,7 +5,7 @@ export default defineNuxtRouteMiddleware((to) => {
     // @ts-expect-error
     return setPageLayout(to.query.layout);
   }
-  // 控制台布局
+  // 工作台布局
   const dashboardLayoutPages = ['/dashboard'];
   // 全屏布局
   const fullScreenLayoutPages = ['/login', '/register'];

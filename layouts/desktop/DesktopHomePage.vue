@@ -24,7 +24,7 @@
           <NuxtLink class="inline-flex items-center" to="/login">登录<UIcon name="i-heroicons-arrow-right-end-on-rectangle" /></NuxtLink>
         </template>
         <template v-else>
-          <UTooltip text="控制台" :popper="{ placement: 'bottom', offsetDistance: 10, offsetSkid: 0, strategy: 'absolute' }">
+          <UTooltip text="工作台" :popper="{ placement: 'bottom', offsetDistance: 10, offsetSkid: 0, strategy: 'absolute' }">
             <UButton class="relative" icon="i-heroicons-computer-desktop-solid" color="primary" to="/dashboard" square variant="ghost"> </UButton>
           </UTooltip>
           <UDropdown :items="dropdownItems" :popper="{ placement: 'bottom', offsetDistance: 10, offsetSkid: 0, strategy: 'absolute' }">
