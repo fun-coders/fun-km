@@ -1,10 +1,7 @@
 <template>
   <div class="flex h-full w-full flex-col justify-between p-10">
-    <h2>关于我们</h2>
+    <NuxtLink to="https://lichong.work">博客</NuxtLink>
+    TODO
   </div>
 </template>
-<script setup lang="ts">
-definePageMeta({
-  layout: 'desktop-with-head',
-});
-</script>
+<script setup lang="ts"></script>
