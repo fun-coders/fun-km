@@ -1,13 +1,5 @@
 <template>
-  <UDropdown
-    class="relative"
-    :items="dropdownItems"
-    :popper="{
-      placement: 'bottom',
-      strategy: 'absolute',
-    }"
-    :ui="ui"
-  >
+  <UDropdown class="relative" :items="dropdownItems" :popper="popper" :ui="ui">
     <template #account="{ item }">
       <UDropdown
         class="relative w-full"
@@ -23,7 +15,8 @@
       >
         <div class="group flex w-full items-center gap-2 rounded-md text-sm text-gray-700 dark:text-gray-200">
           <UIcon :name="item.icon" class="h-4 w-4 flex-shrink-0 text-gray-400 dark:text-gray-500" />
-          <span class="truncate">{{ item.label }}</span>
+          <span class="mr-auto truncate">{{ item.label }}</span>
+          <UIcon name="i-heroicons-chevron-right-16-solid" class="h-4 w-4 flex-shrink-0 text-gray-400 dark:text-gray-500" />
         </div>
       </UDropdown>
     </template>
@@ -32,10 +25,17 @@
 </template>
 <script setup lang="ts">
 defineProps({
+  popper: {
+    type: Object,
+    default: () => ({
+      placement: 'bottom',
+      strategy: 'absolute',
+    }),
+  },
   ui: {
     type: Object,
     default: () => ({
-      width: 'w-full',
+      width: 'w-full min-w-[150px]',
       item: {
         active: 'bg-[--sidebar-hover-bg]',
       },
@@ -43,6 +43,8 @@ defineProps({
   },
 });
 const globalLayoutStore = useGlobalLayoutStore();
+const supabase = useSupabaseClient();
+const router = useRouter();
 const dropdownItems = ref([
   [
     {
@@ -55,6 +57,9 @@ const dropdownItems = ref([
     {
       label: '个人信息',
       icon: 'i-heroicons-user-circle-16-solid',
+      click: () => {
+        router.push('/dashboard/profile');
+      },
     },
     {
       label: '操作记录',
@@ -70,6 +75,10 @@ const dropdownItems = ref([
     {
       label: '退出登录',
       icon: 'i-heroicons-arrow-right-on-rectangle-20-solid',
+      click: () => {
+        supabase.auth.signOut();
+        router.push('/');
+      },
     },
   ],
 ]);

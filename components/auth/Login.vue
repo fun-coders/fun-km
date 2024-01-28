@@ -57,7 +57,9 @@ import { z } from 'zod';
 import type { FormSubmitEvent } from '#ui/types';
 
 const supabase = useSupabaseClient();
+const user = useSupabaseUser();
 const toast = useToast();
+const config = useRuntimeConfig();
 
 const loading = ref(false);
 const router = useRouter();
@@ -70,12 +72,16 @@ const schema = z.object({
   password: z.string().min(1, '请输入密码'),
 });
 type Schema = z.output<typeof schema>;
+onBeforeMount(() => {
+  // 已经登录则直接跳转
+  if (user.value) router.push(config.public.loginRedirect);
+});
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   try {
     loading.value = true;
     const { error } = await supabase.auth.signInWithPassword(event.data);
     if (error) throw error;
-    await router.push('/dashboard');
+    await router.push(config.public.loginRedirect);
     toast.add({
       id: 'login-success',
       title: '登录成功',

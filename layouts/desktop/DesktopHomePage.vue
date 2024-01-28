@@ -4,7 +4,7 @@
       <NuxtLink to="/" class="flex items-center">
         <logo class="w-[230px]" />
       </NuxtLink>
-      <nav class="">
+      <nav>
         <ol class="relative z-10 flex h-full w-full items-center justify-center gap-9">
           <li v-for="(item, index) in navList" :key="index" class="flex h-3/5 flex-col justify-between drop-shadow-md">
             <NuxtLink :to="item.path" class="transition delay-100 ease-in-out hover:-translate-y-1 hover:scale-105 hover:drop-shadow-2xl">{{
@@ -27,9 +27,9 @@
           <UTooltip text="工作台" :popper="{ placement: 'bottom', offsetDistance: 10, offsetSkid: 0, strategy: 'absolute' }">
             <UButton class="relative" icon="i-heroicons-computer-desktop-solid" color="primary" to="/dashboard" square variant="ghost"> </UButton>
           </UTooltip>
-          <UDropdown :items="dropdownItems" :popper="{ placement: 'bottom', offsetDistance: 10, offsetSkid: 0, strategy: 'absolute' }">
+          <LayoutAuthDropDown>
             <UButton class="relative" color="white" :label="user.email" trailing-icon="i-heroicons-chevron-down-20-solid" variant="link" />
-          </UDropdown>
+          </LayoutAuthDropDown>
         </template>
       </div>
     </div>
@@ -40,9 +40,7 @@
 </template>
 <script setup lang="ts">
 const user = useSupabaseUser();
-const supabase = useSupabaseClient();
 const route = useRoute();
-const router = useRouter();
 const navList = [
   {
     name: '首页',
@@ -52,26 +50,5 @@ const navList = [
     name: '关于我们',
     path: '/about',
   },
-];
-const dropdownItems = [
-  [
-    {
-      label: '个人信息',
-      icon: 'i-heroicons-user-16-solid',
-      click: () => {
-        router.push('/dashboard/profile');
-      },
-    },
-  ],
-  [
-    {
-      label: '退出登录',
-      icon: 'i-heroicons-arrow-right-circle-20-solid',
-      click: () => {
-        supabase.auth.signOut();
-        router.push('/');
-      },
-    },
-  ],
 ];
 </script>

@@ -19,11 +19,12 @@ module.exports = {
       env: {
         // 应用名称
         NUXT_PUBLIC_APP_TITLE: '知识库',
+        NUXT_PUBLIC_LOGIN_REDIRECT: '/dashboard',
       },
       env_dev: {
         NODE_ENV: 'development',
         NUXT_PUBLIC_SUPABASE_URL: 'http://192.168.3.6:8000',
-        NUXT_SUPABASE_KEY:
+        NUXT_PUBLIC_SUPABASE_KEY:
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.ewogICJyb2xlIjogImFub24iLAogICJpc3MiOiAic3VwYWJhc2UiLAogICJpYXQiOiAxNzA1NTA3MjAwLAogICJleHAiOiAxODYzMzYwMDAwCn0.lLdp7BX1DD2vwZlQEw0QbFuaxI_pv2G1bI2eis6wNVs',
         NUXT_SUPABASE_SERVICE_KEY:
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.ewogICJyb2xlIjogInNlcnZpY2Vfcm9sZSIsCiAgImlzcyI6ICJzdXBhYmFzZSIsCiAgImlhdCI6IDE3MDU1MDcyMDAsCiAgImV4cCI6IDE4NjMzNjAwMDAKfQ.gPkkfxbWcaISV_jAaaELdQWqWYrfF1xn7J5GoQ4wMrc',
@@ -31,7 +32,7 @@ module.exports = {
       env_prod: {
         NODE_ENV: 'production',
         NUXT_PUBLIC_SUPABASE_URL: 'http://192.168.3.6:8000',
-        NUXT_SUPABASE_KEY:
+        NUXT_PUBLIC_SUPABASE_KEY:
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.ewogICJyb2xlIjogImFub24iLAogICJpc3MiOiAic3VwYWJhc2UiLAogICJpYXQiOiAxNzA1NTA3MjAwLAogICJleHAiOiAxODYzMzYwMDAwCn0.lLdp7BX1DD2vwZlQEw0QbFuaxI_pv2G1bI2eis6wNVs',
         NUXT_SUPABASE_SERVICE_KEY:
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.ewogICJyb2xlIjogInNlcnZpY2Vfcm9sZSIsCiAgImlzcyI6ICJzdXBhYmFzZSIsCiAgImlhdCI6IDE3MDU1MDcyMDAsCiAgImV4cCI6IDE4NjMzNjAwMDAKfQ.gPkkfxbWcaISV_jAaaELdQWqWYrfF1xn7J5GoQ4wMrc',

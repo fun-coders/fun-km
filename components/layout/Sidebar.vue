@@ -1,46 +1,49 @@
 <template>
-  <div class="h-full w-[350px] rounded-r-3xl bg-[--sidebar-bg] py-3">
-    <div class="sidebar-header h-[75px]">
+  <div class="h-full rounded-r-3xl bg-[--sidebar-bg] py-3" :class="sidebarCollapsed ? 'w-[60px]' : 'w-[350px]'">
+    <div class="sidebar-header" :class="sidebarCollapsed ? 'h-[45px]' : 'h-[75px]'">
       <NuxtLink to="/" class="flex items-center">
-        <logo v-if="isExpand" />
-        <nuxt-img v-else src="/images/logo-square.png" alt="logo-square" width="60px" loading="lazy"></nuxt-img>
+        <logo :show-title="!sidebarCollapsed" />
       </NuxtLink>
     </div>
-    <div class="m-3 mt-0 h-[60px]">
+    <div class="mt-0 h-[60px]" :class="sidebarCollapsed ? 'm-0' : 'm-3'">
       <LayoutAuthDropDown class="h-full w-full">
-        <UButton class="h-full w-full bg-[--sidebar-bg] text-black hover:bg-[--sidebar-hover-bg]" variant="ghost">
-          <div class="mx-4 flex w-full items-center justify-between">
+        <UButton
+          class="h-full w-full bg-[--sidebar-bg] text-black hover:bg-[--sidebar-hover-bg]"
+          variant="ghost"
+          :class="sidebarCollapsed ? 'p-0' : ''"
+        >
+          <div class="flex w-full items-center" :class="sidebarCollapsed ? 'mx-0 justify-center' : 'mx-4 justify-between'">
             <UAvatar size="md" src="https://avatars.githubusercontent.com/u/739984?v=4" alt="Avatar" />
-            <div class="ml-3 mr-auto flex flex-col items-start justify-between">
-              <div class="text-xl font-semibold">彭于晏</div>
-              <div class="text-xs">mail@lichong.host</div>
+            <div class="ml-3 mr-auto flex flex-col items-start justify-between" :class="sidebarCollapsed ? 'hidden' : ''">
+              <div class="text-xl font-semibold">{{ user?.user_metadata?.nickname }}</div>
+              <div class="text-xs">{{ user?.email }}</div>
             </div>
-            <UIcon name="i-heroicons-arrows-up-down-solid" />
+            <UIcon name="i-heroicons-arrows-up-down-solid" :class="sidebarCollapsed ? 'hidden' : ''" />
           </div>
         </UButton>
       </LayoutAuthDropDown>
     </div>
-    <div class="flex h-[calc(100%-135px)] flex-col justify-between">
+    <div class="flex flex-col justify-between" :class="sidebarCollapsed ? 'h-[calc(100%-105px)]' : 'h-[calc(100%-135px)]'">
       <div>
         <UVerticalNavigation :links="topLinks" :ui="verticalNavigationUI" />
         <UDivider />
       </div>
       <div>
         <UDivider />
-        <div class="flex items-center justify-between px-3">
-          <div>
-            <UTooltip text="个人空间">
-              <UButton icon="i-heroicons-user-solid" color="primary" square variant="ghost" />
-            </UTooltip>
-            <UTooltip text="租户一">
-              <UButton icon="i-heroicons-building-office-2" color="primary" square variant="ghost" />
-            </UTooltip>
-            <UTooltip text="租户二">
-              <UButton icon="i-heroicons-building-office-2" color="primary" square variant="ghost" />
-            </UTooltip>
-          </div>
-          <UTooltip text="收起">
-            <UButton class="rotate-[90deg]" icon="i-heroicons-bars-arrow-down-solid" color="primary" square variant="link" />
+        <div class="flex items-center justify-between px-3" :class="sidebarCollapsed ? 'flex-col' : ''">
+          <AuthTenantList :class="sidebarCollapsed ? 'flex flex-col items-center justify-center' : ''" />
+          <UTooltip :class="sidebarCollapsed ? '' : 'ml-auto'" text="主题切换">
+            <LayoutThemeChangeButton variant="link" />
+          </UTooltip>
+          <UTooltip :text="sidebarCollapsed ? '展开' : '收起'">
+            <UButton
+              class="rotate-90"
+              :icon="sidebarCollapsed ? 'i-heroicons-bars-arrow-up-solid' : 'i-heroicons-bars-arrow-down-solid'"
+              color="primary"
+              square
+              variant="link"
+              @click="() => globalLayoutStore.sidebarToggle()"
+            />
           </UTooltip>
         </div>
       </div>
@@ -48,23 +51,28 @@
   </div>
 </template>
 <script setup lang="ts">
-const isExpand = ref(true);
+const user = useSupabaseUser();
+const globalLayoutStore = useGlobalLayoutStore();
+const sidebarCollapsed = computed(() => globalLayoutStore.sidebarCollapsed);
 const topLinks = [
   [
     {
       label: '首页',
       icon: 'i-heroicons-home-solid',
       to: '/dashboard',
+      labelClass: sidebarCollapsed ? '' : 'hidden',
     },
     {
       label: '搜索',
       icon: 'i-heroicons-magnifying-glass',
       to: '/dashboard/search',
+      labelClass: sidebarCollapsed ? '' : 'hidden',
     },
     {
       label: '通知',
       icon: 'i-heroicons-bell-alert',
       to: '/dashboard/alert',
+      labelClass: sidebarCollapsed ? '' : 'hidden',
     },
   ],
 ];
@@ -74,7 +82,7 @@ const verticalNavigationUI = {
   icon: {
     base: 'w-5 h-5',
   },
-  rounded: 'rounded-none rounded-r-lg',
+  rounded: 'rounded-2xl',
   active: 'bg-gradient-to-r to-transparent from-[--sidebar-active-bg] before:!static !font-semibold',
   inactive: ' before:!static hover:bg-[--sidebar-hover-bg] dark:hover:bg-gray-800',
 };
