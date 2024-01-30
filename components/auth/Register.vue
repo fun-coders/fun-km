@@ -46,9 +46,10 @@
 <script setup lang="ts">
 import { Schema, z } from 'zod';
 import type { FormError, FormSubmitEvent } from '#ui/types';
-import { AuthError } from '@supabase/gotrue-js/src/lib/errors';
+import { KmResponse, KmResponseCode } from '~/utils/response';
+import { KmError } from '~/api/error';
+import { register } from '~/api/auth/user/register';
 
-const supabase = useSupabaseClient();
 const toast = useToast();
 
 const loading = ref(false);
@@ -71,23 +72,23 @@ const validate = (state: RegisterForm): FormError[] => {
 async function onSubmit(event: FormSubmitEvent<RegisterForm>) {
   try {
     loading.value = true;
-    const { error } = await supabase.auth.signUp({
-      email: event.data.email,
-      password: event.data.password,
-    });
-    if (error) throw error;
-    await router.push('/login');
-    toast.add({
-      id: 'login-success',
-      title: '注册成功',
-      description: '现在可以输入邮箱和密码进行登录',
-      icon: 'i-heroicons-check-circle',
-      timeout: 2000,
-      color: 'green',
-    });
+    const data: KmResponse<string> = await register(event.data.email, event.data.password);
+    if (data.statusCode === KmResponseCode.SUCCESS) {
+      await router.push('/login');
+      toast.add({
+        id: 'login-success',
+        title: '注册成功',
+        description: '现在可以输入邮箱和密码进行登录',
+        icon: 'i-heroicons-check-circle',
+        timeout: 2000,
+        color: 'green',
+      });
+    } else {
+      throw data.error;
+    }
   } catch (error) {
-    const err = error as AuthError;
-    console.error(err?.message);
+    const err = error as KmError;
+    console.error(error);
     toast.add({
       id: 'login-error',
       title: '注册失败',
