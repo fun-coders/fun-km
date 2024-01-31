@@ -45,11 +45,15 @@ export const fetchUserTenantData = async () => {
   const { data, error } = await userKmTenantsQuery;
   if (error) throw error;
   const userKmTenants: UserKmTenants = data;
+  // 个人空间排在前面
+  userKmTenants.sort((item) => {
+    // @ts-expect-error
+    return item.km_tenant.tenant_type === 'personal' ? -1 : 1;
+  });
   userTenantsStore.setUserTenants(userKmTenants);
   const defaultUserKmTenant = userKmTenants.find((userKmTenant) => {
-    // supabase的TS类型定义有问题，这里外键绑定的是id，查出来只有一个对象，不是数组，所以需要重新定义一下类型
-    const tenant: any = userKmTenant.km_tenant;
-    return tenant.tenant_type === 'personal';
+    // @ts-expect-error
+    return userKmTenant.km_tenant.tenant_type === 'personal';
   });
   userTenantsStore.setCurrentUserTenant(defaultUserKmTenant);
   return userKmTenants;
