@@ -24,6 +24,8 @@
   </UDropdown>
 </template>
 <script setup lang="ts">
+import type { Database } from '~/types/supabase';
+
 defineProps({
   popper: {
     type: Object,
@@ -43,7 +45,7 @@ defineProps({
   },
 });
 const globalLayoutStore = useGlobalLayoutStore();
-const supabase = useSupabaseClient();
+const supabase = useSupabaseClient<Database>();
 const router = useRouter();
 const dropdownItems = ref([
   [

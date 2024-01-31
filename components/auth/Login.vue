@@ -55,8 +55,10 @@
 <script setup lang="ts">
 import { z } from 'zod';
 import type { FormSubmitEvent } from '#ui/types';
+import type { Database } from '~/types/supabase';
+import { initWithUser } from '~/init/init-global';
 
-const supabase = useSupabaseClient();
+const supabase = useSupabaseClient<Database>();
 const user = useSupabaseUser();
 const toast = useToast();
 const config = useRuntimeConfig();
@@ -81,6 +83,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     loading.value = true;
     const { error } = await supabase.auth.signInWithPassword(event.data);
     if (error) throw error;
+    await initWithUser();
     await router.push(config.public.loginRedirect);
     toast.add({
       id: 'login-success',

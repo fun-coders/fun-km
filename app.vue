@@ -10,6 +10,10 @@
   <!-- global Pop-up box end-->
 </template>
 <script setup lang="ts">
+import { init } from '~/init/init-global';
+
 const colorMode = useColorMode();
 colorMode.preference = 'light';
+// 初始化全局数据
+init();
 </script>
