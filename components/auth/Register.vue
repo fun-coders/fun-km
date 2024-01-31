@@ -47,8 +47,7 @@
 import { Schema, z } from 'zod';
 import type { FormError, FormSubmitEvent } from '#ui/types';
 import { KmResponse, KmResponseCode } from '~/utils/response';
-import { KmError } from '~/api/error';
-import { register } from '~/api/auth/user/register';
+import { KmError } from '~/types/error';
 
 const toast = useToast();
 
@@ -72,7 +71,10 @@ const validate = (state: RegisterForm): FormError[] => {
 async function onSubmit(event: FormSubmitEvent<RegisterForm>) {
   try {
     loading.value = true;
-    const data: KmResponse<string> = await register(event.data.email, event.data.password);
+    const data: KmResponse<string> = await $fetch('/api/auth/user/register', {
+      method: 'post',
+      body: { email: event.data.email, password: event.data.password },
+    });
     if (data.statusCode === KmResponseCode.SUCCESS) {
       await router.push('/login');
       toast.add({
@@ -80,7 +82,6 @@ async function onSubmit(event: FormSubmitEvent<RegisterForm>) {
         title: '注册成功',
         description: '现在可以输入邮箱和密码进行登录',
         icon: 'i-heroicons-check-circle',
-        timeout: 2000,
         color: 'green',
       });
     } else {

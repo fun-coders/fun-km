@@ -43,7 +43,7 @@
               <span>忘记密码？</span>
             </ULink>
           </div>
-          <UButton class="shadow-lg" type="submit" block size="xl">
+          <UButton class="shadow-lg" type="submit" block size="xl" :loading="loading">
             <span v-if="loading">登录中...</span>
             <span v-else>登录</span>
           </UButton>

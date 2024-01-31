@@ -15,7 +15,6 @@ export interface Database {
           share_scope_default: Database['public']['Enums']['km_share_scope'];
           share_scope_page_group_id: number | null;
           summary: string | null;
-          tenant_id: number;
           title: string;
           topic: string | null;
           updated_at: string;
@@ -31,7 +30,6 @@ export interface Database {
           share_scope_default?: Database['public']['Enums']['km_share_scope'];
           share_scope_page_group_id?: number | null;
           summary?: string | null;
-          tenant_id: number;
           title: string;
           topic?: string | null;
           updated_at: string;
@@ -47,7 +45,6 @@ export interface Database {
           share_scope_default?: Database['public']['Enums']['km_share_scope'];
           share_scope_page_group_id?: number | null;
           summary?: string | null;
-          tenant_id?: number;
           title?: string;
           topic?: string | null;
           updated_at?: string;
@@ -71,17 +68,10 @@ export interface Database {
             referencedRelation: 'km_page_group';
             referencedColumns: ['id'];
           },
-          {
-            foreignKeyName: 'km_document_tenant_id_fkey';
-            columns: ['tenant_id'];
-            referencedRelation: 'km_tenant';
-            referencedColumns: ['id'];
-          },
         ];
       };
       km_page_group: {
         Row: {
-          ' tenant_id': number;
           created_at: string;
           description: string | null;
           id: number;
@@ -94,7 +84,6 @@ export interface Database {
           updated_at: string;
         };
         Insert: {
-          ' tenant_id': number;
           created_at?: string;
           description?: string | null;
           id?: number;
@@ -107,7 +96,6 @@ export interface Database {
           updated_at?: string;
         };
         Update: {
-          ' tenant_id'?: number;
           created_at?: string;
           description?: string | null;
           id?: number;
@@ -119,21 +107,14 @@ export interface Database {
           title?: string;
           updated_at?: string;
         };
-        Relationships: [
-          {
-            foreignKeyName: 'km_page_group_ tenant_id_fkey';
-            columns: [' tenant_id'];
-            referencedRelation: 'km_tenant';
-            referencedColumns: ['id'];
-          },
-        ];
+        Relationships: [];
       };
       km_tenant: {
         Row: {
           created_at: string;
           created_by: string;
           favicon_path: string | null;
-          id: number;
+          id: string;
           invitation_code: string;
           is_review_open: boolean;
           is_share_action_change_allow: boolean;
@@ -149,7 +130,7 @@ export interface Database {
           created_at?: string;
           created_by: string;
           favicon_path?: string | null;
-          id?: number;
+          id?: string;
           invitation_code?: string;
           is_review_open?: boolean;
           is_share_action_change_allow?: boolean;
@@ -165,7 +146,7 @@ export interface Database {
           created_at?: string;
           created_by?: string;
           favicon_path?: string | null;
-          id?: number;
+          id?: string;
           invitation_code?: string;
           is_review_open?: boolean;
           is_share_action_change_allow?: boolean;
@@ -189,22 +170,25 @@ export interface Database {
       km_tenant_users: {
         Row: {
           created_at: string;
-          id: number;
+          id: string;
           is_manager: boolean;
+          tenant_id: string;
           updated_at: string;
           user_id: string;
         };
         Insert: {
           created_at?: string;
-          id?: number;
+          id?: string;
           is_manager?: boolean;
+          tenant_id: string;
           updated_at?: string;
           user_id: string;
         };
         Update: {
           created_at?: string;
-          id?: number;
+          id?: string;
           is_manager?: boolean;
+          tenant_id?: string;
           updated_at?: string;
           user_id?: string;
         };
@@ -222,7 +206,12 @@ export interface Database {
       [_ in never]: never;
     };
     Functions: {
-      [_ in never]: never;
+      register: {
+        Args: {
+          created_by_val: string;
+        };
+        Returns: boolean;
+      };
     };
     Enums: {
       [_ in never]: never;
