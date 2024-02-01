@@ -26,13 +26,36 @@
       <div class="w-1/3">
         <UForm class="flex h-full w-full flex-col justify-center" :validate="validate" :schema="schema" :state="state" @submit="onSubmit">
           <UFormGroup class="h-20" label="" name="email">
-            <UInput v-model="state.email" size="xl" placeholder="请输入邮箱" autocomplete="username"></UInput>
+            <UInput
+              v-model="state.email"
+              size="xl"
+              placeholder="请输入邮箱"
+              autocomplete="username"
+              icon="i-heroicons-envelope"
+              :disabled="loading"
+            ></UInput>
           </UFormGroup>
           <UFormGroup class="h-20" label="" name="password">
-            <UInput v-model="state.password" size="xl" type="password" placeholder="请输入密码" autocomplete="current-password"></UInput>
+            <UInput
+              v-model="state.password"
+              size="xl"
+              type="password"
+              placeholder="请输入密码"
+              autocomplete="current-password"
+              icon="i-heroicons-key"
+              :disabled="loading"
+            ></UInput>
           </UFormGroup>
           <UFormGroup class="h-20" label="" name="confirmPassword">
-            <UInput v-model="state.confirmPassword" size="xl" type="password" placeholder="请再次输入密码" autocomplete="current-password"></UInput>
+            <UInput
+              v-model="state.confirmPassword"
+              size="xl"
+              type="password"
+              placeholder="请再次输入密码"
+              autocomplete="current-password"
+              icon="i-heroicons-key-solid"
+              :disabled="loading"
+            ></UInput>
           </UFormGroup>
           <UButton class="mt-20" type="submit" block size="xl" :loading="loading">
             <span v-if="loading">注册中...</span>

@@ -13,7 +13,7 @@
           :class="sidebarCollapsed ? 'p-0' : ''"
         >
           <div class="flex w-full items-center" :class="sidebarCollapsed ? 'mx-0 justify-center' : 'mx-4 justify-between'">
-            <UAvatar size="md" src="https://avatars.githubusercontent.com/u/739984?v=4" alt="Avatar" />
+            <UAvatar size="md" icon="i-heroicons-user-solid" :alt="user?.user_metadata?.nickname ?? user?.email" />
             <div class="ml-3 mr-auto flex flex-col items-start justify-between" :class="sidebarCollapsed ? 'hidden' : ''">
               <div class="text-xl font-semibold">{{ user?.user_metadata?.nickname }}</div>
               <div class="text-xs">{{ user?.email }}</div>
@@ -26,10 +26,10 @@
     <div class="flex flex-col justify-between" :class="sidebarCollapsed ? 'h-[calc(100%-105px)]' : 'h-[calc(100%-135px)]'">
       <div>
         <UVerticalNavigation :links="topLinks" :ui="verticalNavigationUI" />
-        <UDivider />
+        <UVerticalNavigation v-if="currentUserTenant.is_manager" :links="tenantLinks" :ui="verticalNavigationUI" />
       </div>
       <div>
-        <UDivider />
+        <UDivider class="mb-[3px]" />
         <div class="flex items-center justify-between px-3" :class="sidebarCollapsed ? 'flex-col' : ''">
           <AuthTenantList :class="sidebarCollapsed ? 'flex flex-col items-center justify-center' : ''" />
           <UTooltip :class="sidebarCollapsed ? '' : 'ml-auto'" text="主题切换">
@@ -53,7 +53,9 @@
 <script setup lang="ts">
 const user = useSupabaseUser();
 const globalLayoutStore = useGlobalLayoutStore();
+const userTenantsStore = useUserTenantsStore();
 const sidebarCollapsed = computed(() => globalLayoutStore.sidebarCollapsed);
+const currentUserTenant = computed(() => userTenantsStore.currentUserTenant);
 const topLinks = [
   [
     {
@@ -75,6 +77,19 @@ const topLinks = [
       labelClass: sidebarCollapsed ? '' : 'hidden',
     },
   ],
+  [],
+];
+const tenantLinks = [
+  [
+    {
+      label: '团队管理',
+      icon: 'i-heroicons-user-group',
+      to: '/dashboard/tenant/manage',
+      labelClass: sidebarCollapsed ? '' : 'hidden',
+      hidden: true,
+    },
+  ],
+  [],
 ];
 const verticalNavigationUI = {
   size: 'text-xl',
@@ -84,6 +99,6 @@ const verticalNavigationUI = {
   },
   rounded: 'rounded-2xl',
   active: 'bg-gradient-to-r to-transparent from-[--sidebar-active-bg] before:!static !font-semibold',
-  inactive: ' before:!static hover:bg-[--sidebar-hover-bg] dark:hover:bg-gray-800',
+  inactive: 'before:!static hover:bg-gradient-to-r hover:to-transparent hover:from-[--sidebar-hover-bg] before:!static',
 };
 </script>

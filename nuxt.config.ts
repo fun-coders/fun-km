@@ -9,7 +9,7 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
-      title: process.env.NUXT_PUBLIC_APP_TITLE ?? '知识库',
+      title: process.env.NUXT_PUBLIC_SITE_NAME ?? 'FUN_KM知识库',
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
       htmlAttrs: {
@@ -20,7 +20,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     supabaseServiceKey: process.env.NUXT_SUPABASE_SERVICE_KEY,
     public: {
-      appTitle: process.env.NUXT_PUBLIC_APP_TITLE ?? '知识库',
+      siteName: process.env.NUXT_PUBLIC_SITE_NAME ?? 'FUN_KM知识库',
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL ?? 'https://fun-km.vercel.app',
       supabaseUrl: process.env.NUXT_PUBLIC_SUPABASE_URL,
       supabaseKey: process.env.NUXT_PUBLIC_SUPABASE_KEY,
       loginRedirect: process.env.NUXT_PUBLIC_LOGIN_REDIRECT ?? '/dashboard',
@@ -35,6 +36,7 @@ export default defineNuxtConfig({
     '@nuxtjs/supabase',
     '@pinia/nuxt',
     '@formkit/auto-animate/nuxt',
+    '@nuxtjs/seo',
   ],
   css: ['~/assets/styles/main.scss'],
   image: {
@@ -75,9 +77,29 @@ export default defineNuxtConfig({
     families: {
       Poppins: true,
       Roboto: true,
-      'Noto+Serif+Simplified+Chinese': true,
+      'Noto+Sans+SC': true,
     },
     display: 'swap',
     preload: true,
+  },
+  ui: {
+    // https://icones.js.org/， default already include 'heroicons'
+    icons: ['grommet-icons'],
+  },
+  sitemap: {
+    // 缓存时间
+    cacheMaxAgeSeconds: 3600,
+  },
+  site: {
+    url: process.env.NUXT_PUBLIC_SITE_URL ?? 'https://fun-km.vercel.app',
+    name: process.env.NUXT_PUBLIC_SITE_NAME ?? 'FUN_KM知识库',
+  },
+  ogImage: {
+    fonts: ['Noto+Sans+SC:400'],
+  },
+  colorMode: {
+    preference: 'system',
+    fallback: 'light',
+    classSuffix: '',
   },
 });

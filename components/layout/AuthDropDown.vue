@@ -88,11 +88,12 @@ const accountsDropdownItems = ref([
   [
     {
       label: '账号一',
-      icon: 'i-heroicons-building-office-2',
+      icon: 'i-heroicons-user-solid',
     },
     {
-      label: '账号二',
-      icon: 'i-heroicons-building-office-2',
+      label: '添加账号',
+      icon: 'i-heroicons-plus',
+      click: () => globalLayoutStore.addAccountToggle(),
     },
   ],
 ]);

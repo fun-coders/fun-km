@@ -15,6 +15,9 @@
         </ol>
       </nav>
       <div class="relative z-10 flex h-full items-center justify-end gap-1 text-xl drop-shadow-md">
+        <UTooltip text="GitHub" :popper="{ placement: 'bottom', offsetDistance: 10, offsetSkid: 0, strategy: 'absolute' }">
+          <layout-git-button class="relative" variant="ghost" />
+        </UTooltip>
         <UTooltip text="主题切换" :popper="{ placement: 'bottom', offsetDistance: 10, offsetSkid: 0, strategy: 'absolute' }">
           <layout-theme-change-button class="relative" variant="ghost" />
         </UTooltip>

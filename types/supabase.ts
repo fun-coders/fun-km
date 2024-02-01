@@ -194,6 +194,12 @@ export interface Database {
         };
         Relationships: [
           {
+            foreignKeyName: 'km_tenant_users_tenant_id_fkey';
+            columns: ['tenant_id'];
+            referencedRelation: 'km_tenant';
+            referencedColumns: ['id'];
+          },
+          {
             foreignKeyName: 'km_tenant_users_user_id_fkey';
             columns: ['user_id'];
             referencedRelation: 'users';
@@ -206,6 +212,13 @@ export interface Database {
       [_ in never]: never;
     };
     Functions: {
+      create_new_tenant: {
+        Args: {
+          created_by_val: string;
+          tenant_name: string;
+        };
+        Returns: string;
+      };
       register: {
         Args: {
           created_by_val: string;

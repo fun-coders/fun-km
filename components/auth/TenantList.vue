@@ -8,7 +8,7 @@
               ? userTenant.km_tenant.favicon_path
               : userTenant.km_tenant.tenant_type === 'personal'
                 ? 'i-heroicons-user-solid'
-                : 'i-heroicons-building-office-2'
+                : 'i-heroicons-user-group-solid'
           "
           color="primary"
           square

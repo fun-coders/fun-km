@@ -10,7 +10,7 @@
       内容
       <template #footer>
         <div class="flex items-center justify-end">
-          <UButton color="primary" square variant="solid">保存</UButton>
+          <UButton color="primary" variant="solid">保存</UButton>
         </div>
       </template>
     </UCard>

@@ -26,7 +26,15 @@
       <div class="w-1/3">
         <UForm class="flex h-full w-full flex-col justify-center" :schema="schema" :state="state" @submit="onSubmit">
           <UFormGroup class="h-20" label="" name="email">
-            <UInput v-model="state.email" class="shadow-md" size="xl" placeholder="请输入邮箱" autocomplete="username"></UInput>
+            <UInput
+              v-model="state.email"
+              class="shadow-md"
+              size="xl"
+              placeholder="请输入邮箱"
+              autocomplete="username"
+              icon="i-heroicons-envelope"
+              :disabled="loading"
+            ></UInput>
           </UFormGroup>
           <UFormGroup class="h-20" label="" name="password">
             <UInput
@@ -36,6 +44,8 @@
               type="password"
               placeholder="请输入密码"
               autocomplete="current-password"
+              icon="i-heroicons-key"
+              :disabled="loading"
             ></UInput>
           </UFormGroup>
           <div class="flex w-full justify-end">

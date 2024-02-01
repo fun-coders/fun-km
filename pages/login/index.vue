@@ -4,7 +4,8 @@
       <NuxtLink to="/" class="flex items-center">
         <logo />
       </NuxtLink>
-      <div>
+      <div class="flex gap-2">
+        <layout-git-button />
         <layout-theme-change-button />
       </div>
     </div>
