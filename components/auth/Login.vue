@@ -1,7 +1,7 @@
 <template>
-  <UCard class="fe-card z-10 w-full">
-    <div class="flex min-h-[600px] min-w-[700px] justify-between p-10">
-      <div class="fe-card-left relative w-2/3">
+  <UCard ref="loginCardRef" class="fe-card z-10 w-full">
+    <div class="flex min-h-[400px] justify-between p-10">
+      <div v-if="cardWidth > 700" class="fe-card-left relative w-2/3">
         <div class="relative z-10 mb-20 text-5xl font-bold">
           <div class="mb-3">欢迎进入</div>
           <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;知识库</div>
@@ -23,7 +23,7 @@
           loading="lazy"
         ></nuxt-img>
       </div>
-      <div class="w-1/3">
+      <div :class="cardWidth > 700 ? 'w-1/3' : 'w-full'">
         <UForm class="flex h-full w-full flex-col justify-center" :schema="schema" :state="state" @submit="onSubmit">
           <UFormGroup class="h-20" label="" name="email">
             <UInput
@@ -74,6 +74,8 @@ const toast = useToast();
 const config = useRuntimeConfig();
 
 const loading = ref(false);
+const loginCardRef = ref<HTMLElement>();
+const cardWidth = computed(() => loginCardRef.value?.$el?.offsetWidth);
 const router = useRouter();
 const state = reactive({
   email: '',

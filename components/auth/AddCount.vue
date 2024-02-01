@@ -4,13 +4,7 @@
       <template #header>
         <div class="flex items-center justify-between">
           <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">添加账号</h3>
-          <UButton
-            color="gray"
-            variant="ghost"
-            icon="i-heroicons-x-mark-20-solid"
-            class="-my-1"
-            @click="() => globalLayoutStore.addAccountToggle()"
-          />
+          <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1" @click="close()" />
         </div>
       </template>
       <div v-if="step === 0" class="flex flex-col gap-2 rounded-2xl border p-3">
@@ -31,13 +25,14 @@
           />
         </div>
       </div>
+      <AuthLogin v-if="step === 3" />
       <template #footer>
         <div v-if="step === 0" class="flex items-center justify-center">
-          <UButton color="primary" variant="link" :disabled="loading">使用其他邮箱登录</UButton>
+          <UButton color="primary" variant="link" @click="() => (step = 3)">使用其他邮箱登录</UButton>
         </div>
-        <div v-else class="flex items-center justify-end gap-2">
+        <div v-if="[1, 2, 3].includes(step)" class="flex items-center justify-end gap-2">
           <UButton color="primary" variant="outline" :disabled="loading" @click="() => (step = 0)">上一步</UButton>
-          <UButton color="primary" variant="solid" :loading="loading" @click="submit">确认</UButton>
+          <UButton v-if="[1, 2].includes(step)" color="primary" variant="solid" :loading="loading" @click="submit">确认</UButton>
         </div>
       </template>
     </UCard>
@@ -46,7 +41,7 @@
 <script setup lang="ts">
 import type { Database } from '~/types/supabase';
 import { useUserTenantsStore } from '~/stores/useUserTenantsStore';
-import { getUserTenantData } from '~/api/auth/tenant/init-tenant';
+import { getUserTenantData } from '~/api/auth/tenant/fetch-tenant';
 
 const globalLayoutStore = useGlobalLayoutStore();
 const userTenantsStore = useUserTenantsStore();
@@ -56,6 +51,16 @@ const toast = useToast();
 const step = ref(0);
 const newTenantName = ref('');
 const loading = ref(false);
+/**
+ * 表单初始化值
+ */
+const initForm = () => {
+  newTenantName.value = '';
+  step.value = 0;
+};
+/**
+ * 提交表单
+ */
 const submit = async () => {
   loading.value = true;
   try {
@@ -93,9 +98,12 @@ const submit = async () => {
       // TODO 加入已有团队
     }
   } finally {
-    newTenantName.value = '';
-    step.value = 0;
+    initForm();
     loading.value = false;
   }
+};
+const close = () => {
+  globalLayoutStore.addAccountToggle();
+  initForm();
 };
 </script>

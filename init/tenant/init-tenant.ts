@@ -1,5 +1,5 @@
 import { useUserTenantsStore } from '~/stores/useUserTenantsStore';
-import { getUserTenantData } from '~/api/auth/tenant/init-tenant';
+import { getUserTenantData } from '~/api/auth/tenant/fetch-tenant';
 
 /**
  * @description 获取用户的租户信息，并设置默认租户
