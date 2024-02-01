@@ -26,7 +26,11 @@
     <div class="flex flex-col justify-between" :class="sidebarCollapsed ? 'h-[calc(100%-105px)]' : 'h-[calc(100%-135px)]'">
       <div>
         <UVerticalNavigation :links="topLinks" :ui="verticalNavigationUI" />
-        <UVerticalNavigation v-if="currentUserTenant.is_manager" :links="tenantLinks" :ui="verticalNavigationUI" />
+        <UVerticalNavigation
+          v-if="currentUserTenant.is_manager && currentUserTenant.km_tenant?.tenant_type !== 'personal'"
+          :links="tenantLinks"
+          :ui="verticalNavigationUI"
+        />
       </div>
       <div>
         <UDivider class="mb-[3px]" />

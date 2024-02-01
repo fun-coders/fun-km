@@ -123,7 +123,7 @@ export interface Database {
           is_share_scope_default: Database['public']['Enums']['km_share_scope'];
           logo_path: string | null;
           name: string;
-          tenant_type: Database['public']['Enums']['km_tenant_type'];
+          cc: Database['public']['Enums']['km_tenant_type'];
           updated_at: string;
         };
         Insert: {
