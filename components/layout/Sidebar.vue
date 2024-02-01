@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full rounded-r-3xl bg-[--sidebar-bg] py-3" :class="sidebarCollapsed ? 'w-[60px]' : 'w-[350px]'">
+  <div class="h-full rounded-r-3xl bg-[--sidebar-bg] py-3" :class="sidebarCollapsed ? 'w-[55px]' : 'w-[350px]'">
     <div class="sidebar-header" :class="sidebarCollapsed ? 'h-[45px]' : 'h-[75px]'">
       <NuxtLink to="/" class="flex items-center">
         <logo :show-title="!sidebarCollapsed" />
@@ -58,39 +58,37 @@
 const user = useSupabaseUser();
 const globalLayoutStore = useGlobalLayoutStore();
 const userTenantsStore = useUserTenantsStore();
-const sidebarCollapsed = computed(() => globalLayoutStore.sidebarCollapsed);
+const sidebarCollapsed = computed(() => {
+  console.log(globalLayoutStore.sidebarCollapsed);
+  return globalLayoutStore.sidebarCollapsed;
+});
 const currentUserTenant = computed(() => userTenantsStore.currentUserTenant);
-const topLinks = [
+const topLinks = ref([
   [
     {
       label: '首页',
       icon: 'i-heroicons-home-solid',
       to: '/dashboard',
-      labelClass: sidebarCollapsed ? '' : 'hidden',
     },
     {
       label: '搜索',
       icon: 'i-heroicons-magnifying-glass',
       to: '/dashboard/search',
-      labelClass: sidebarCollapsed ? '' : 'hidden',
     },
     {
       label: '通知',
       icon: 'i-heroicons-bell-alert',
       to: '/dashboard/alert',
-      labelClass: sidebarCollapsed ? '' : 'hidden',
     },
   ],
   [],
-];
+]);
 const tenantLinks = [
   [
     {
       label: '团队管理',
       icon: 'i-heroicons-user-group',
       to: '/dashboard/tenant/manage',
-      labelClass: sidebarCollapsed ? '' : 'hidden',
-      hidden: true,
     },
   ],
   [],
