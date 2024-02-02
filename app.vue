@@ -7,7 +7,7 @@
   <!-- global Pop-up box start -->
   <UNotifications />
   <Settings />
-  <AuthAddCount />
+  <AuthAddAccount />
   <!-- global Pop-up box end-->
 </template>
 <script setup lang="ts">
@@ -19,7 +19,7 @@ const colorMode = useColorMode();
 colorMode.preference = 'light';
 // 初始化全局数据
 init();
-let defaultColor = '#ff0000';
+let defaultColor = '#517a7b';
 const rgbIndex: number[] = useCssVar('--color-primary-DEFAULT')
   .value?.split(' ')
   .map((item) => Number(item));

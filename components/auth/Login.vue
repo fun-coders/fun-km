@@ -49,7 +49,7 @@
             ></UInput>
           </UFormGroup>
           <div class="flex w-full justify-end">
-            <ULink class="mb-5 mt-20">
+            <ULink class="mb-5 mt-14">
               <span>忘记密码？</span>
             </ULink>
           </div>
@@ -67,7 +67,14 @@ import { z } from 'zod';
 import type { FormSubmitEvent } from '#ui/types';
 import type { Database } from '~/types/supabase';
 import { initWithUser } from '~/init/init-global';
+import { CURRENT_USER_LOCALSTORAGE_KEY, USERS_LOCALSTORAGE_KEY } from '~/utils/constant';
 
+const props = defineProps({
+  successCallback: {
+    type: Function,
+    default: () => {},
+  },
+});
 const supabase = useSupabaseClient<Database>();
 const user = useSupabaseUser();
 const toast = useToast();
@@ -93,10 +100,21 @@ onBeforeMount(() => {
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   try {
     loading.value = true;
+    const historyUsers: any[] = JSON.parse(localStorage.getItem(USERS_LOCALSTORAGE_KEY) ?? '[]');
     const { error } = await supabase.auth.signInWithPassword(event.data);
     if (error) throw error;
     await initWithUser();
     await router.push(config.public.loginRedirect);
+    // 保存登录状态
+    const localUser = localStorage.getItem(CURRENT_USER_LOCALSTORAGE_KEY);
+    if (historyUsers.length <= 0 && localUser) {
+      localStorage.setItem(USERS_LOCALSTORAGE_KEY, JSON.stringify([JSON.parse(localUser)]));
+    } else if (localUser) {
+      const index = historyUsers.findIndex((u) => u?.user?.id === user.value?.id);
+      if (index === -1) {
+        localStorage.setItem(USERS_LOCALSTORAGE_KEY, JSON.stringify([...historyUsers, JSON.parse(localUser)]));
+      }
+    }
     toast.add({
       id: 'login-success',
       title: '登录成功',
@@ -105,6 +123,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       timeout: 2000,
       color: 'green',
     });
+    props.successCallback();
   } catch (error) {
     toast.add({
       id: 'login-error',

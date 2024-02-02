@@ -4,7 +4,7 @@
       <template #header>
         <div class="flex items-center justify-between">
           <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">添加账号</h3>
-          <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1" @click="close()" />
+          <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" @click="close()" />
         </div>
       </template>
       <div v-if="step === 0" class="flex flex-col gap-2 rounded-2xl border p-3">
@@ -25,7 +25,7 @@
           />
         </div>
       </div>
-      <AuthLogin v-if="step === 3" />
+      <AuthLogin v-if="step === 3" :success-callback="() => globalLayoutStore.addAccountToggle()" />
       <template #footer>
         <div v-if="step === 0" class="flex items-center justify-center">
           <UButton color="primary" variant="link" @click="() => (step = 3)">使用其他邮箱登录</UButton>

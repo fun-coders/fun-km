@@ -1,12 +1,12 @@
 <template>
   <div class="flex h-full w-full flex-col items-center justify-center">
-    <div class="flex h-[100px] w-full justify-between px-10 pt-5 text-3xl">
+    <div class="flex h-[100px] w-full justify-between px-1 pt-1 text-lg sm:px-5 sm:pt-3 sm:text-xl lg:px-10 lg:pt-5 lg:text-3xl">
       <NuxtLink to="/" class="flex items-center">
-        <logo class="w-[230px]" />
+        <logo />
       </NuxtLink>
-      <nav>
+      <nav class="hidden sm:flex">
         <ol class="relative z-10 flex h-full w-full items-center justify-center gap-9">
-          <li v-for="(item, index) in navList" :key="index" class="flex h-3/5 flex-col justify-between drop-shadow-md">
+          <li v-for="(item, index) in navList" :key="index" class="flex flex-col items-center justify-between drop-shadow-md">
             <NuxtLink :to="item.path" class="transition delay-100 ease-in-out hover:-translate-y-1 hover:scale-105 hover:drop-shadow-2xl">{{
               item.name
             }}</NuxtLink>
@@ -14,7 +14,7 @@
           </li>
         </ol>
       </nav>
-      <div class="relative z-10 flex h-full items-center justify-end gap-1 text-xl drop-shadow-md">
+      <div class="relative z-10 flex h-full items-center justify-end gap-1 text-lg drop-shadow-md lg:text-xl">
         <UTooltip text="GitHub" :popper="{ placement: 'bottom', offsetDistance: 10, offsetSkid: 0, strategy: 'absolute' }">
           <layout-git-button class="relative" variant="ghost" />
         </UTooltip>

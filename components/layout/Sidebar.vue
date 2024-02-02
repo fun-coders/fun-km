@@ -6,7 +6,7 @@
       </NuxtLink>
     </div>
     <div class="mt-0 h-[60px]" :class="sidebarCollapsed ? 'm-0' : 'm-3'">
-      <LayoutAuthDropDown class="h-full w-full">
+      <LayoutAuthDropDown>
         <UButton
           class="h-full w-full bg-[--sidebar-bg] text-black hover:bg-[--sidebar-hover-bg]"
           variant="ghost"
@@ -58,12 +58,9 @@
 const user = useSupabaseUser();
 const globalLayoutStore = useGlobalLayoutStore();
 const userTenantsStore = useUserTenantsStore();
-const sidebarCollapsed = computed(() => {
-  console.log(globalLayoutStore.sidebarCollapsed);
-  return globalLayoutStore.sidebarCollapsed;
-});
+const sidebarCollapsed = computed(() => globalLayoutStore.sidebarCollapsed);
 const currentUserTenant = computed(() => userTenantsStore.currentUserTenant);
-const topLinks = ref([
+const topLinks = computed(() => [
   [
     {
       label: '首页',
@@ -83,7 +80,7 @@ const topLinks = ref([
   ],
   [],
 ]);
-const tenantLinks = [
+const tenantLinks = computed(() => [
   [
     {
       label: '团队管理',
@@ -92,7 +89,7 @@ const tenantLinks = [
     },
   ],
   [],
-];
+]);
 const verticalNavigationUI = {
   size: 'text-xl',
   padding: 'px-3 py-2.5',
