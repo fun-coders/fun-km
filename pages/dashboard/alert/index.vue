@@ -3,4 +3,8 @@
     <h2>通知</h2>
   </div>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+useHead({
+  title: '通知',
+});
+</script>

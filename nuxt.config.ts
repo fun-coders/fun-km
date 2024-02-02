@@ -15,6 +15,10 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: 'zh-cn',
       },
+      templateParams: {
+        titleTemplate: '%s %separator %siteName',
+        separator: '-',
+      },
     },
   },
   runtimeConfig: {

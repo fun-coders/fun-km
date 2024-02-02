@@ -3,4 +3,8 @@
     <h2>个人中心</h2>
   </div>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+useHead({
+  title: '个人中心',
+});
+</script>

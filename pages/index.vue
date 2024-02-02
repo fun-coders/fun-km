@@ -15,7 +15,7 @@
     </div>
   </div>
   <nuxt-img
-    class="absolute bottom-0 right-0 z-0 ml-auto"
+    class="absolute bottom-0 right-0 z-[-1] ml-auto"
     src="/images/woman-on-book.png"
     placeholder
     alt="首页背景"
@@ -23,4 +23,8 @@
     loading="lazy"
   ></nuxt-img>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+useHead({
+  title: '首页',
+});
+</script>

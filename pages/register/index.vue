@@ -16,4 +16,7 @@
 definePageMeta({
   layout: 'desktop-full-screen',
 });
+useHead({
+  title: '注册',
+});
 </script>

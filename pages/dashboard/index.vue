@@ -7,4 +7,7 @@
 definePageMeta({
   layout: 'desktop-dashboard',
 });
+useHead({
+  title: '工作台',
+});
 </script>
