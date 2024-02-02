@@ -74,7 +74,7 @@ const user = useSupabaseUser();
 const signOutConfirmModalOpen = ref(false);
 const historyUsers = computed(() => {
   const historyLocalUsers: any[] = JSON.parse(localStorage.getItem(USERS_LOCALSTORAGE_KEY) ?? '[]');
-  return historyLocalUsers
+  const temp = historyLocalUsers
     .flatMap((localUser) => {
       return {
         label: localUser?.user?.email,
@@ -92,6 +92,12 @@ const historyUsers = computed(() => {
       };
     })
     .filter((localUser) => localUser.label !== user.value?.email);
+  temp.push({
+    label: '添加账号',
+    icon: 'i-heroicons-plus',
+    click: async () => globalLayoutStore.addAccountToggle(),
+  });
+  return temp;
 });
 const dropdownItems = computed(() => [
   [
@@ -127,16 +133,7 @@ const dropdownItems = computed(() => [
     },
   ],
 ]);
-const accountsDropdownItems = computed(() => [
-  historyUsers.value,
-  [
-    {
-      label: '添加账号',
-      icon: 'i-heroicons-plus',
-      click: () => globalLayoutStore.addAccountToggle(),
-    },
-  ],
-]);
+const accountsDropdownItems = computed(() => [historyUsers.value]);
 const signOut = () => {
   localStorage.removeItem(USERS_LOCALSTORAGE_KEY);
   supabase.auth.signOut();

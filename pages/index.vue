@@ -1,5 +1,5 @@
 <template>
-  <div class="relative z-10 flex h-full w-full flex-col justify-between p-10 drop-shadow-2xl backdrop-blur-sm sm:backdrop-blur-none">
+  <div class="relative flex h-full w-full flex-col justify-between p-10 drop-shadow-2xl backdrop-blur-sm sm:backdrop-blur-none">
     <div class="relative z-10 text-4xl font-bold text-white sm:ml-10 sm:text-6xl lg:ml-20 lg:text-9xl">
       <h1 class="mb-16">多人协同</h1>
       <h1 class="mb-16 ml-12 sm:ml-36 lg:ml-48">知识库</h1>
