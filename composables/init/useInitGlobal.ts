@@ -1,5 +1,5 @@
 import { useUserTenantsStore } from '~/stores/useUserTenantsStore';
-import { getUserTenantData } from '~/api/auth/tenant/fetch-tenant';
+import { useUserTenantDataFetch } from '~/composables/fetch/useUserTenantDataFetch';
 
 /**
  * @description 初始化
@@ -30,7 +30,7 @@ const initWithUser = async () => {
  */
 const fetchUserTenantData = async () => {
   const userTenantsStore = useUserTenantsStore();
-  const userKmTenants = await getUserTenantData();
+  const userKmTenants = await useUserTenantDataFetch();
   const defaultUserKmTenant = userKmTenants.find((userKmTenant) => {
     // @ts-ignore
     return userKmTenant.km_tenant?.tenant_type === 'personal';

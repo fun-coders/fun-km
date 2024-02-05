@@ -5,7 +5,7 @@ import { useUserTenantsStore } from '~/stores/useUserTenantsStore';
 /**
  * @description 获取用户的租户信息
  */
-export const getUserTenantData = async () => {
+export const useUserTenantDataFetch = async () => {
   const client = useSupabaseClient<Database>();
   const user = useSupabaseUser();
   const userTenantsStore = useUserTenantsStore();

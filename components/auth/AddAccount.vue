@@ -41,7 +41,7 @@
 <script setup lang="ts">
 import type { Database } from '~/types/supabase';
 import { useUserTenantsStore } from '~/stores/useUserTenantsStore';
-import { getUserTenantData } from '~/api/auth/tenant/fetch-tenant';
+import { useUserTenantDataFetch } from '~/composables/fetch/useUserTenantDataFetch';
 
 const globalLayoutStore = useGlobalLayoutStore();
 const userTenantsStore = useUserTenantsStore();
@@ -89,7 +89,7 @@ const submit = async () => {
         timeout: 2000,
         color: 'green',
       });
-      const userKmTenants = await getUserTenantData();
+      const userKmTenants = await useUserTenantDataFetch();
       const defaultUserKmTenant = userKmTenants.find((userKmTenant) => {
         // @ts-ignore
         return userKmTenant.km_tenant?.id === tenantId;
