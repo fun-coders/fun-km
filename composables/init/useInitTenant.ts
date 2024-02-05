@@ -1,5 +1,4 @@
 import type { Database } from '~/types/supabase';
-import type { KmResponse } from '~/utils/response';
 
 const initPersonalTenant = async () => {
   const client = useSupabaseClient<Database>();
@@ -17,10 +16,10 @@ const initPersonalTenant = async () => {
     return;
   }
   globalLayoutStore.openGlobalLoading('欢迎您第一次进入个人工作台，正在初始化 ......');
-  const data: KmResponse<string> = await $fetch('/api/auth/user/init-personal-tenant', {
+  const { data: personalTenantData, error: personalTenantError } = await useFetch('/api/auth/user/init-personal-tenant', {
     headers: useRequestHeaders(['cookie']),
   });
-  if (data.statusCode === KmResponseCode.SUCCESS) {
+  if (personalTenantData.value?.statusCode === KmResponseCode.SUCCESS) {
     globalLayoutStore.closeGlobalLoading();
     toast.add({
       id: 'personal-tenant-init-success',
@@ -34,7 +33,7 @@ const initPersonalTenant = async () => {
     toast.add({
       id: 'personal-tenant-init-error',
       title: '初始化工作台失败',
-      description: data?.error?.message,
+      description: personalTenantError.value?.message,
       icon: 'i-heroicons-shield-exclamation',
       color: 'red',
       actions: [

@@ -106,8 +106,8 @@ async function onSubmit(event: FormSubmitEvent<RegisterForm>) {
       await router.push('/login');
       toast.add({
         id: 'login-success',
-        title: '注册成功',
-        description: '验证成功后可以输入邮箱和密码进行登录',
+        title: '注册完成',
+        description: '请打开邮箱查看您的验证链接将会自动登录',
         icon: 'i-heroicons-check-circle',
         color: 'green',
       });
