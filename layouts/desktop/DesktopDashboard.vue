@@ -1,7 +1,12 @@
 <template>
-  <layout-sidebar />
-  <UContainer class="w-full">
-    <slot />
-  </UContainer>
+  <div class="flex h-full w-full items-center justify-center">
+    <layout-sidebar />
+    <UContainer>
+      <slot />
+    </UContainer>
+  </div>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const initTenant = useInitTenant();
+initTenant.initPersonalTenant();
+</script>

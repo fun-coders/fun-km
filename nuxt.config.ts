@@ -32,6 +32,9 @@ export default defineNuxtConfig({
       routeWhiteList: process.env.NUXT_ROUTE_WHITE_LIST ?? '/login,/register,/about,/',
     },
   },
+  imports: {
+    dirs: ['composables/**'],
+  },
   modules: [
     '@nuxtjs/eslint-module',
     '@nuxt/ui',
@@ -54,7 +57,12 @@ export default defineNuxtConfig({
     redirectOptions: {
       login: '/login',
       callback: process.env.NUXT_PUBLIC_LOGIN_REDIRECT ?? '/dashboard',
-      exclude: process.env.NUXT_ROUTE_WHITE_LIST?.split(',') ?? ['/login', '/register', '/about', '/'],
+      exclude: process.env.NUXT_ROUTE_WHITE_LIST?.split(',') ?? ['/login', '/register', '/about', '/', '/redirect/sign-up/confirm'],
+      cookieRedirect: true,
+    },
+    cookieName: 'fun_km_supabase_cookie',
+    cookieOptions: {
+      secure: process.env.NODE_ENV === 'production',
     },
     clientOptions: {
       auth: {

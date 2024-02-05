@@ -47,7 +47,6 @@
 </template>
 <script setup lang="ts">
 import type { Database } from '~/types/supabase';
-import { initWithUser } from '~/init/init-global';
 
 defineProps({
   popper: {
@@ -71,6 +70,7 @@ const globalLayoutStore = useGlobalLayoutStore();
 const supabase = useSupabaseClient<Database>();
 const router = useRouter();
 const user = useSupabaseUser();
+const { initWithUser } = useInitGlobal();
 const signOutConfirmModalOpen = ref(false);
 const historyUsers = computed(() => {
   const historyLocalUsers: any[] = JSON.parse(localStorage.getItem(USERS_LOCALSTORAGE_KEY) ?? '[]');

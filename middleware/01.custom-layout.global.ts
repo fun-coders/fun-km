@@ -1,7 +1,6 @@
 export default defineNuxtRouteMiddleware((to) => {
   // 根据路由参数选择布局
   if (to.query.layout) {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     return setPageLayout(to.query.layout);
   }

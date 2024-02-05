@@ -27,7 +27,7 @@
       <div>
         <UVerticalNavigation :links="topLinks" :ui="verticalNavigationUI" />
         <UVerticalNavigation
-          v-if="currentUserTenant.is_manager && currentUserTenant.km_tenant?.tenant_type !== 'personal'"
+          v-if="currentUserTenant?.is_manager && currentUserTenant.km_tenant?.tenant_type !== 'personal'"
           :links="tenantLinks"
           :ui="verticalNavigationUI"
         />

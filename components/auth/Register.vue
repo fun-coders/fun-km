@@ -69,15 +69,16 @@
 <script setup lang="ts">
 import { Schema, z } from 'zod';
 import type { FormError, FormSubmitEvent } from '#ui/types';
-import { KmResponse, KmResponseCode } from '~/utils/response';
-import { KmError } from '~/types/error';
+import { useSupabaseClient } from '#imports';
+import type { Database } from '~/types/supabase';
+import { AuthError } from '@supabase/gotrue-js';
 
 const toast = useToast();
-
 const loading = ref(false);
 const registerCardRef = ref<HTMLElement>();
 const cardWidth = computed(() => registerCardRef.value?.$el?.offsetWidth);
 const router = useRouter();
+const client = useSupabaseClient<Database>();
 const state = reactive<RegisterForm>({
   email: '',
   password: '',
@@ -93,27 +94,28 @@ const validate = (state: RegisterForm): FormError[] => {
   if (state.password !== state.confirmPassword) errors.push({ path: 'confirmPassword', message: '两次输入密码不一致' });
   return errors;
 };
+
 async function onSubmit(event: FormSubmitEvent<RegisterForm>) {
   try {
     loading.value = true;
-    const data: KmResponse<string> = await $fetch('/api/auth/user/register', {
-      method: 'post',
-      body: { email: event.data.email, password: event.data.password },
+    const { error: signUpError } = await client.auth.signUp({
+      email: event.data.email,
+      password: event.data.password,
     });
-    if (data.statusCode === KmResponseCode.SUCCESS) {
+    if (!signUpError) {
       await router.push('/login');
       toast.add({
         id: 'login-success',
         title: '注册成功',
-        description: '现在可以输入邮箱和密码进行登录',
+        description: '验证成功后可以输入邮箱和密码进行登录',
         icon: 'i-heroicons-check-circle',
         color: 'green',
       });
     } else {
-      throw data.error;
+      throw signUpError;
     }
   } catch (error) {
-    const err = error as KmError;
+    const err = error as AuthError;
     console.error(error);
     toast.add({
       id: 'login-error',
@@ -139,6 +141,7 @@ async function onSubmit(event: FormSubmitEvent<RegisterForm>) {
 <style scoped lang="scss">
 .fe-card {
   border-radius: 20px;
+
   .fe-card-left {
     background: radial-gradient(50% 50% at 50% 50%, rgba(var(--color-primary-300)), transparent);
   }

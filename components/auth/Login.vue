@@ -66,8 +66,8 @@
 import { z } from 'zod';
 import type { FormSubmitEvent } from '#ui/types';
 import type { Database } from '~/types/supabase';
-import { initWithUser } from '~/init/init-global';
 import { CURRENT_USER_LOCALSTORAGE_KEY, USERS_LOCALSTORAGE_KEY } from '~/utils/constant';
+import { isAuthError } from '@supabase/gotrue-js';
 
 const props = defineProps({
   successCallback: {
@@ -79,6 +79,7 @@ const supabase = useSupabaseClient<Database>();
 const user = useSupabaseUser();
 const toast = useToast();
 const config = useRuntimeConfig();
+const { initWithUser } = useInitGlobal();
 
 const loading = ref(false);
 const loginCardRef = ref<HTMLElement>();
@@ -125,10 +126,14 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     });
     props.successCallback();
   } catch (error) {
+    let description = '检查邮箱和密码是否正确';
+    if (isAuthError(error)) {
+      description = error.message;
+    }
     toast.add({
       id: 'login-error',
       title: '登录失败',
-      description: '检查邮箱和密码是否正确',
+      description,
       icon: 'i-heroicons-shield-exclamation',
       color: 'red',
     });

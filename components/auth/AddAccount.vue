@@ -25,7 +25,7 @@
           />
         </div>
       </div>
-      <AuthLogin v-if="step === 3" :success-callback="() => globalLayoutStore.addAccountToggle()" />
+      <AuthLogin v-if="step === 3" :success-callback="successLoginCallback" />
       <template #footer>
         <div v-if="step === 0" class="flex items-center justify-center">
           <UButton color="primary" variant="link" @click="() => (step = 3)">使用其他邮箱登录</UButton>
@@ -48,6 +48,7 @@ const userTenantsStore = useUserTenantsStore();
 const user = useSupabaseUser();
 const client = useSupabaseClient<Database>();
 const toast = useToast();
+const initTenant = useInitTenant();
 const step = ref(0);
 const newTenantName = ref('');
 const loading = ref(false);
@@ -90,6 +91,7 @@ const submit = async () => {
       });
       const userKmTenants = await getUserTenantData();
       const defaultUserKmTenant = userKmTenants.find((userKmTenant) => {
+        // @ts-ignore
         return userKmTenant.km_tenant?.id === tenantId;
       });
       userTenantsStore.setCurrentUserTenant(defaultUserKmTenant);
@@ -101,6 +103,13 @@ const submit = async () => {
     initForm();
     loading.value = false;
   }
+};
+/**
+ * 登录成功回调
+ */
+const successLoginCallback = async () => {
+  await initTenant.initPersonalTenant();
+  globalLayoutStore.addAccountToggle();
 };
 const close = () => {
   globalLayoutStore.addAccountToggle();
