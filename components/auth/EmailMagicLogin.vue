@@ -11,7 +11,11 @@
         :disabled="loading"
       ></UInput>
     </UFormGroup>
-    <UButton class="shadow-lg" type="submit" block size="xl" :loading="loading">
+    <div class="flex w-full items-center justify-end text-gray-500">
+      <UIcon name="i-heroicons-information-circle" class="text-gray-500" />
+      <span>如果账号不存在将会自动无密码注册</span>
+    </div>
+    <UButton class="mt-5 shadow-lg" type="submit" block size="xl" :loading="loading">
       <span v-if="loading">发送中...</span>
       <span v-else>发送邮件</span>
     </UButton>
@@ -40,7 +44,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     const { error } = await supabase.auth.signInWithOtp({
       email: event.data?.email,
       options: {
-        shouldCreateUser: false,
+        shouldCreateUser: true,
       },
     });
     if (error) throw error;

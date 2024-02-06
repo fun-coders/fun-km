@@ -34,7 +34,9 @@
           <UTooltip v-if="loginWay !== LoginWay.EmailMagic" text="邮件一键登录">
             <UButton icon="i-heroicons-envelope-solid" color="primary" size="xl" @click="() => (loginWay = LoginWay.EmailMagic)" />
           </UTooltip>
-          <AuthGithubLogin />
+          <UTooltip text="Github">
+            <AuthGithubLogin />
+          </UTooltip>
         </div>
       </div>
     </div>

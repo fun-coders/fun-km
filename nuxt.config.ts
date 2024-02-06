@@ -15,6 +15,12 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: 'zh-cn',
       },
+      meta: [
+        {
+          name: 'google-site-verification',
+          content: 'SLEC6V3ujPqcq_Y14djhkfztCV2s9bRLLDhMz4G-gDA',
+        },
+      ],
       templateParams: {
         titleTemplate: '%s %separator %siteName',
         separator: '-',

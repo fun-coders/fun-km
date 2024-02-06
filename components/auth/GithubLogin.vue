@@ -1,16 +1,14 @@
 <template>
-  <UTooltip text="Github">
-    <UButton icon="i-grommet-icons-github" color="primary" size="xl" @click="loginWithGithub" />
-  </UTooltip>
+  <UButton icon="i-grommet-icons-github" color="primary" size="xl" @click="loginWithGithub" />
 </template>
 <script lang="ts" setup>
 import type { Database } from '~/types/supabase';
 
 const client = useSupabaseClient<Database>();
 const loginWithGithub = async () => {
-  const { data, error } = await client.auth.signInWithOAuth({
+  await client.auth.signInWithOAuth({
     provider: 'github',
+    options: { redirectTo: '/dashboard' },
   });
-  console.log('client', data, error);
 };
 </script>
