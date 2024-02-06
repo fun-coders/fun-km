@@ -26,7 +26,6 @@
       <div :class="cardWidth > 1000 ? 'w-1/3' : 'w-full'" class="h-full">
         <AuthPasswordLogin v-if="loginWay === LoginWay.Password" :success-callback="props.successCallback" />
         <AuthEmailMagicLogin v-if="loginWay === LoginWay.EmailMagic" />
-        <AuthGithubLogin v-if="loginWay === LoginWay.Github" />
         <UDivider class="my-5" label="其他登录方式" />
         <div class="flex items-center justify-around">
           <UTooltip v-if="loginWay !== LoginWay.Password" text="密码登录">
@@ -35,9 +34,7 @@
           <UTooltip v-if="loginWay !== LoginWay.EmailMagic" text="邮件一键登录">
             <UButton icon="i-heroicons-envelope-solid" color="primary" size="xl" @click="() => (loginWay = LoginWay.EmailMagic)" />
           </UTooltip>
-          <UTooltip v-if="loginWay !== LoginWay.Github" text="Github">
-            <UButton icon="i-grommet-icons-github" color="primary" size="xl" @click="() => (loginWay = LoginWay.Github)" />
-          </UTooltip>
+          <AuthGithubLogin />
         </div>
       </div>
     </div>
