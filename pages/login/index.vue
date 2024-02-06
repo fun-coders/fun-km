@@ -4,7 +4,8 @@
       <NuxtLink to="/" class="flex items-center">
         <logo />
       </NuxtLink>
-      <div class="flex gap-2">
+      <div class="flex items-center justify-end gap-2">
+        <UHorizontalNavigation :links="links" />
         <layout-git-button />
         <layout-theme-change-button />
       </div>
@@ -19,4 +20,14 @@ definePageMeta({
 useHead({
   title: '登录',
 });
+const links = [
+  {
+    label: '注册',
+    to: '/register',
+  },
+  {
+    label: '登录',
+    to: '/login',
+  },
+];
 </script>
