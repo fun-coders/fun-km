@@ -20,6 +20,10 @@ export default defineNuxtConfig({
           name: 'google-site-verification',
           content: 'SLEC6V3ujPqcq_Y14djhkfztCV2s9bRLLDhMz4G-gDA',
         },
+        {
+          name: 'baidu-site-verification',
+          content: 'codeva-28zoMJbNSl',
+        },
       ],
       templateParams: {
         titleTemplate: '%s %separator %siteName',
