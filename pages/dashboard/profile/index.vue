@@ -1,10 +1,10 @@
 <template>
-  <div class="flex h-full w-full flex-col justify-between p-10">
-    <h2>个人中心</h2>
+  <div class="flex h-full w-full flex-col justify-between">
+    <AuthUserProfile />
   </div>
 </template>
 <script setup lang="ts">
 useHead({
-  title: '个人中心',
+  title: '个人信息',
 });
 </script>

@@ -4,6 +4,7 @@
   --sidebar-bg: #{$sidebar-bg-light};
   --sidebar-active-bg: #{$sidebar-active-bg-light};
   --sidebar-hover-bg: #{$sidebar-hover-bg-light};
+  --main-container-bg: #{$main-container-bg-light};
   background-color: $base-bg-light;
   color: $base-text-light;
 }
@@ -12,6 +13,7 @@
   --sidebar-bg: #{$sidebar-bg-dark};
   --sidebar-active-bg: #{$sidebar-active-bg-dark};
   --sidebar-hover-bg: #{$sidebar-hover-bg-dark};
+  --main-container-bg: #{$main-container-bg-dark};
   background-color: $base-bg-dark;
   color: $base-text-dark;
 }

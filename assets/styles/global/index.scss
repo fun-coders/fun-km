@@ -1,6 +1,8 @@
 @use 'variables' as *;
 @use 'scrollbar' as *;
 @use 'theme' as *;
+@use 'date-picker' as *;
+
 body {
   font-family: $default-font-family;
 }
