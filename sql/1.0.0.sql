@@ -12,15 +12,15 @@ CREATE SCHEMA IF NOT EXISTS fun_km;
 -- ----------------------------
 DROP TYPE IF EXISTS public.km_tenant_type CASCADE;
 CREATE TYPE public.km_tenant_type AS ENUM ('personal', 'enterprise');
-COMMENT ON TABLE "fun_km"."km_tenant" IS '租户类型';
+COMMENT ON TYPE public.km_tenant_type IS '租户类型';
 
 DROP TYPE IF EXISTS public.km_share_scope CASCADE;
 CREATE TYPE public.km_share_scope AS ENUM ('private', 'group', 'public');
-COMMENT ON TABLE "fun_km"."km_tenant" IS '分享范围';
+COMMENT ON TYPE public.km_share_scope IS '分享范围';
 
 DROP TYPE IF EXISTS public.km_share_action CASCADE;
 CREATE TYPE public.km_share_action AS ENUM ('read-only', 'editable', 'manageable');
-COMMENT ON TABLE "fun_km"."km_tenant" IS '分享可操作行为';
+COMMENT ON TYPE public.km_share_action IS '分享可操作行为';
 
 -- ----------------------------
 -- Table structure for km_tenant
