@@ -22,6 +22,7 @@
             size="xl"
             placeholder="团队名称"
             icon="i-heroicons-user-group-solid"
+            autofocus
           />
         </div>
       </div>

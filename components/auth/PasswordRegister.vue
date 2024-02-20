@@ -8,6 +8,7 @@
         autocomplete="username"
         icon="i-heroicons-envelope"
         :disabled="loading"
+        autofocus
       ></UInput>
     </UFormGroup>
     <UFormGroup class="h-20" label="" name="password">

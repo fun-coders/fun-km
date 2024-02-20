@@ -9,6 +9,7 @@
         autocomplete="username"
         icon="i-heroicons-envelope"
         :disabled="loading"
+        autofocus
       ></UInput>
     </UFormGroup>
     <div class="flex w-full items-center justify-end text-gray-500">

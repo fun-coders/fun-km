@@ -1,6 +1,6 @@
 <template>
   <UPopover :popper="{ placement: 'bottom-start', strategy: 'absolute' }">
-    <UButton icon="i-heroicons-calendar-days-20-solid" :label="format(date, 'yyyy-MM-dd')" />
+    <UButton icon="i-heroicons-calendar-days-20-solid" :label="format(date, 'yyyy-MM-dd') || '请选择 ▾'" />
     <template #panel="{ close }">
       <VDatePicker v-model="date" @close="close" />
     </template>
@@ -15,7 +15,7 @@ import type { DatePickerDate, DatePickerRangeObject } from 'v-calendar/dist/type
 const props = defineProps({
   modelValue: {
     type: [Date, Object] as PropType<DatePickerDate | DatePickerRangeObject | null>,
-    default: new Date(),
+    default: null,
   },
 });
 
