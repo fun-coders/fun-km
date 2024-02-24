@@ -28,11 +28,17 @@
   </LayoutDashboardContainer>
 </template>
 <script setup lang="ts">
+import type { Database } from '~/types/supabase';
+import { useSupabaseClient } from '#imports';
+
 const userProfile = ref<UserProfile>({});
+const client = useSupabaseClient<Database>();
 const bloodTypes = ['A', 'B', 'AB', 'O'];
 const pushAvatar = (e: Event) => {
   const target = e.target as HTMLInputElement;
   const file = target.files?.[0];
   console.log(e, file, userProfile.value.avatar);
 };
+const kmStorage = await client.storage.getBucket('fun_km');
+console.log('aaa', kmStorage.data);
 </script>

@@ -137,3 +137,22 @@ GRANT ALL ON ALL SEQUENCES IN SCHEMA fun_km TO anon, authenticated, service_role
 ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA fun_km GRANT ALL ON TABLES TO anon, authenticated, service_role;
 ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA fun_km GRANT ALL ON ROUTINES TO anon, authenticated, service_role;
 ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA fun_km GRANT ALL ON SEQUENCES TO anon, authenticated, service_role;
+
+-- ----------------------------
+-- Storage init
+-- ----------------------------
+INSERT INTO "storage"."buckets" ("id", "name", "owner", "created_at", "updated_at", "public", "avif_autodetection", "file_size_limit", "allowed_mime_types", "owner_id") VALUES ('fun_km', 'fun_km', NULL, '2024-01-24 06:29:20.285622+00', '2024-01-24 06:29:20.285622+00', 't', 'f', NULL, NULL, NULL) ON CONFLICT (id) DO NOTHING;
+INSERT INTO "storage"."buckets" ("id", "name", "owner", "created_at", "updated_at", "public", "avif_autodetection", "file_size_limit", "allowed_mime_types", "owner_id") VALUES ('supabase', 'supabase', NULL, '2024-01-24 10:44:28.276544+00', '2024-01-24 10:44:28.276544+00', 't', 'f', NULL, NULL, NULL) ON CONFLICT (id) DO NOTHING;
+
+-- ----------------------------
+-- Storage POLICY init
+-- ----------------------------
+CREATE POLICY "Enable read access for all users" ON "storage"."buckets"
+AS PERMISSIVE FOR SELECT
+TO public
+USING (true);
+
+CREATE POLICY "Allow authenticated action delete" ON storage.objects FOR DELETE TO authenticated USING (bucket_id = 'fun_km' and (storage.foldername(name))[1] = auth.uid()::text);
+CREATE POLICY "Allow authenticated action insert" ON storage.objects FOR INSERT TO authenticated WITH CHECK (bucket_id = 'fun_km' and (storage.foldername(name))[1] = auth.uid()::text);
+CREATE POLICY "Allow authenticated action update" ON storage.objects FOR UPDATE TO authenticated USING (bucket_id = 'fun_km' and (storage.foldername(name))[1] = auth.uid()::text);
+
