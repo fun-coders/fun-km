@@ -9,7 +9,6 @@ import { Database } from '~/types/supabase';
 export default defineEventHandler(async (event) => {
   const client = await serverSupabaseClient<Database>(event);
   const user = await serverSupabaseUser(event);
-  console.log('user', user);
   if (!user) {
     return KmResponse.error(new KmError('请先登录'));
   }

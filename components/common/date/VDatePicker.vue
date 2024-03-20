@@ -30,7 +30,6 @@ const date = computed({
     emit('close');
   },
 });
-console.log('date', date.value, typeof date.value);
 
 const attrs = {
   transparent: true,
