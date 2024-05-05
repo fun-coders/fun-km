@@ -26,7 +26,7 @@
 import { z } from 'zod';
 import type { FormSubmitEvent } from '#ui/types';
 import type { Database } from '~/types/supabase';
-import { isAuthError } from '@supabase/gotrue-js';
+import { isAuthError } from '@supabase/auth-js';
 
 const supabase = useSupabaseClient<Database>();
 const toast = useToast();

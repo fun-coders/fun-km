@@ -44,7 +44,7 @@ import { Schema, z } from 'zod';
 import type { FormError, FormSubmitEvent } from '#ui/types';
 import { useSupabaseClient } from '#imports';
 import type { Database } from '~/types/supabase';
-import { AuthError } from '@supabase/gotrue-js';
+import { AuthError } from '@supabase/auth-js';
 
 const toast = useToast();
 const loading = ref(false);

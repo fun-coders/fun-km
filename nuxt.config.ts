@@ -108,6 +108,9 @@ export default defineNuxtConfig({
     // https://icones.js.org/， default already include 'heroicons'
     icons: ['grommet-icons'],
   },
+  tailwindcss: {
+    quiet: true,
+  },
   sitemap: {
     // 缓存时间
     cacheMaxAgeSeconds: 3600,

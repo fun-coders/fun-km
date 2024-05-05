@@ -58,7 +58,10 @@ const user = useSupabaseUser();
 const config = useRuntimeConfig();
 const loginWay = ref<LoginWay>(LoginWay.Password);
 const loginCardRef = ref<HTMLElement>();
-const cardWidth = computed(() => loginCardRef.value?.$el?.offsetWidth);
+const cardWidth = computed(() => {
+  console.log(loginCardRef.value);
+  return loginCardRef.value?.$el?.offsetWidth;
+});
 const router = useRouter();
 onBeforeMount(() => {
   // 已经登录则直接跳转
